@@ -15,5 +15,7 @@
       "name": "MW Team",
       "email": "contacts@microweber.com"
     }
-  ]
+  ],
+  "type": "microweber-module",
+  "target-dir": "saas-connector"
 }
