@@ -19,8 +19,8 @@ class SaasConnectorRoutesServiceProvider extends RouteServiceProvider
         if (empty($themeConfig)) {
             if (request()->isMethod('get')) {
                 if (!Str::contains(request()->path(), 'setup-wizard')) {
-                   // header('Location: /setup-wizard'); // redirect to setup wizard
-                    //exit;
+                    header('Location: /setup-wizard'); // redirect to setup wizard
+                    exit;
                 }
             }
         }
