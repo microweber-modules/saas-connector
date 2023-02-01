@@ -17,5 +17,6 @@ $config['settings']['autoload_namespace'] = [
     ],
 ];
 $config['settings']['service_provider'] = [
-    \MicroweberPackages\Modules\SaasConnector\SaasConnectorServiceProvider::class
+    \MicroweberPackages\Modules\SaasConnector\SaasConnectorServiceProvider::class,
+    \MicroweberPackages\Modules\SaasConnector\SaasConnectorRoutesServiceProvider::class,
 ];
