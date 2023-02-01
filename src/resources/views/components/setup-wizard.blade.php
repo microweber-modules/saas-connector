@@ -4,6 +4,27 @@
 @section('content')
 
 
+    <script>
+        $(document).ready(function () {
+            $('.js-start-with-this-template').on('click', function () {
+                var template = $(this).data('template');
+                $(this).html('Installing...');
+                $.ajax({
+                    url: '{{route('saas-connector.install-template')}}',
+                    data: {
+                        template: template
+                    },
+                    type: 'post',
+                    success: function (response) {
+                        if (response.success) {
+                            window.location.href = '{{site_url()}}?editmode=y';
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
 
     <div class="container">
         <div class="row">
@@ -22,7 +43,7 @@
                          <img src="{{$template['screenshot']}}" class="img-responsive" />
                         </div>
                     @endif
-                    <button type="button" class="btn mt-3 btn-primary">
+                    <button type="button" data-template="{{$template['dir_name']}}" class="btn mt-3 btn-primary js-start-with-this-template">
                         Start With This Template
                     </button>
                 </div>
