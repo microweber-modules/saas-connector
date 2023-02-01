@@ -1,0 +1,19 @@
+{
+  "name": "microweber-modules/saas-connector",
+  "type": "microweber-modules",
+  "description": "saas-connector",
+  "keywords": [
+    "microweber",
+    "ecommerce",
+    "bootstrap",
+    "default"
+  ],
+  "homepage": "https://microweber.com/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "MW Team",
+      "email": "contacts@microweber.com"
+    }
+  ]
+}
