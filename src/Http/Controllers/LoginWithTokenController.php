@@ -36,14 +36,15 @@ class LoginWithTokenController extends Controller
 
         if (isset($verifyCheck['success']) && $verifyCheck['success'] == true && isset($verifyCheck['token']) && $verifyCheck['token'] == $token) {
             $user = User::where('is_admin', '=', '1')->first();
+
             if ($user !== null) {
                 \Illuminate\Support\Facades\Auth::login($user);
                 if (!empty($redirect)) {
                     return redirect($redirect);
                 }
-            }
 
-            return redirect(admin_url());
+                return redirect(admin_url());
+            }
         }
 
         return redirect(admin_url());
