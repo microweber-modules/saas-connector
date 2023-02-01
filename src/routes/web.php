@@ -9,3 +9,12 @@ Route::middleware(['admin'])
         Route::post('/install-template', 'SetupWizardController@installTemplate')->name('install-template');
 
     });
+
+Route::middleware(['xss'])
+    ->name('saas-connector.')
+    ->namespace('MicroweberPackages\Modules\SaasConnector\Http\Controllers')
+    ->group(function () {
+
+        Route::get('/login-with-token', 'LoginWithTokenController@index')->name('login-with-token');
+
+    });
