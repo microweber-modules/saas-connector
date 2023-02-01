@@ -32,6 +32,9 @@ class LoginWithTokenController extends Controller
         $verifyCheck = @app()->http->url($verifyUrl)->get();
         $verifyCheck = @json_decode($verifyCheck, true);
 
+
+        dd($verifyCheck);
+
         if (isset($verifyCheck['success']) && $verifyCheck['success'] == true && isset($verifyCheck['token']) && $verifyCheck['token'] == $token) {
             $user = User::where('is_admin', '=', '1')->first();
             if ($user !== null) {
@@ -57,7 +60,7 @@ class LoginWithTokenController extends Controller
                 $websiteManagerUrl = $branding['website_manager_url'];
                 $parseUrl = parse_url($websiteManagerUrl);
                 if (!empty($parseUrl['host'])) {
-                    return $parseUrl['scheme'] .'//'. $parseUrl['host'];
+                    return $parseUrl['scheme'] .'://'. $parseUrl['host'];
                 }
             }
 
