@@ -15,14 +15,19 @@ class SaasConnectorRoutesServiceProvider extends RouteServiceProvider
         $this->loadRoutesFrom((__DIR__) . '/routes/admin.php');
         $this->loadRoutesFrom((__DIR__) . '/routes/web.php');
 
-        $themeConfig = app()->template->get_config();
-        if (empty($themeConfig)) {
-            if (request()->isMethod('get')) {
-                if (!Str::contains(request()->path(), 'setup-wizard')) {
-                    header('Location: /setup-wizard'); // redirect to setup wizard
-                    exit;
+        event_bind('mw.front', function () {
+            $themeConfig = app()->template->get_config();
+            if (empty($themeConfig)) {
+                if (mw_is_installed() && is_admin()) {
+                    if (request()->isMethod('get')) {
+                        if (!Str::contains(request()->path(), 'setup-wizard')) {
+                            abort(301, '', ['Location' => site_url('setup-wizard')]);
+                            exit;
+                        }
+                    }
                 }
             }
-        }
+        });
+
     }
 }
