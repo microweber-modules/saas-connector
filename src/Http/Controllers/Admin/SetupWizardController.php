@@ -29,6 +29,8 @@ class SetupWizardController extends \MicroweberPackages\Admin\Http\Controllers\A
                 $installer->createDefaultContent();
             }
 
+            save_option('mw_setup_wizard_completed', 1, 'website');
+
             return response()->json([
                 'success' => true,
             ]);

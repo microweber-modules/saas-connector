@@ -16,8 +16,8 @@ class SaasConnectorRoutesServiceProvider extends RouteServiceProvider
         $this->loadRoutesFrom((__DIR__) . '/routes/web.php');
 
         event_bind('mw.front', function () {
-            $themeConfig = app()->template->get_config();
-            if (empty($themeConfig)) {
+            $setupWizardCheck = get_option('mw_setup_wizard_completed', 'website');
+            if (empty($setupWizardCheck)) {
                 if (mw_is_installed() && is_admin()) {
                     if (request()->isMethod('get')) {
                         if (!Str::contains(request()->path(), 'setup-wizard')) {
