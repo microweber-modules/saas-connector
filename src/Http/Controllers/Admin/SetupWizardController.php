@@ -9,15 +9,26 @@ class SetupWizardController extends \MicroweberPackages\Admin\Http\Controllers\A
     public function index(Request $request)
     {
         $siteTemplates = site_templates();
+        $installTemplate = $request->get('install_template', false);
+        if ($installTemplate) {
+            $this->__installTemplate($installTemplate);
+            return redirect(site_url() . '?editmode=y');
+        }
 
         return view('saas_connector::setup-wizard', [
             'siteTemplates' => $siteTemplates,
         ]);
     }
 
-    public function installTemplate(Request $request) {
-
+    public function installTemplate(Request $request)
+    {
         $template = $request->post('template', false);
+
+        return $this->__installTemplate($template);
+    }
+
+    private function __installTemplate($template) {
+
         if (!empty($template)) {
 
             $installer = new TemplateInstaller();
