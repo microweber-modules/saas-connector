@@ -16,7 +16,6 @@ class SaasConnectorRoutesServiceProvider extends RouteServiceProvider
         $this->loadRoutesFrom((__DIR__) . '/routes/web.php');
 
         event_bind('mw.front', function () {
-
             $setupWizardCheck = get_option('mw_setup_wizard_completed', 'website');
             $templateCheck = get_option('current_template', 'template');
 
@@ -30,7 +29,6 @@ class SaasConnectorRoutesServiceProvider extends RouteServiceProvider
                     }
                 }
             }
-            
         });
 
     }
