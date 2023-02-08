@@ -4,11 +4,12 @@
 @section('content')
 
 
+    <style>
     @php
-    $styleFile = modules_url() . 'saas-connector/src/resources/views/components/scss/styles.css';
+    $styleFile = modules_path() . 'saas-connector/src/resources/views/components/scss/styles.css';
+    echo @file_get_contents($styleFile);
     @endphp
-
-    <link type="text/css" rel="stylesheet" href="{{$styleFile}}" />
+    </style>
 
     <script>
         $(document).ready(function () {
