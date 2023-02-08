@@ -4,6 +4,7 @@
 @section('content')
 
 
+
     <script>
         $(document).ready(function () {
             $('.js-start-with-this-template').on('click', function () {
@@ -26,12 +27,8 @@
     </script>
 
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Choose a template</h1>
-            </div>
-        </div>
+    <div class="container mw-process-templates">
+
         <div class="row mt-4">
             <div class="col-md-2">
                 <b>Categories</b>
@@ -46,7 +43,7 @@
             <div class="row">
             @foreach($siteTemplates as $template)
 
-                <div class="col-md-2">
+                <div class="col-xl-4 col-md-6 col-12">
 
                     <h4>{{$template['name']}}</h4>
 
