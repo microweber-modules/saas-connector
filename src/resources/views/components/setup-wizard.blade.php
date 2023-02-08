@@ -55,6 +55,9 @@
                     @endif
 
                     <div>
+
+                        <a href="/">All</a>
+
                         @if (!empty($template['categories']))
                             @foreach($template['categories'] as $category)
                                 <a href="?category={{$category['slug']}}">{{$category['name']}}</a>
