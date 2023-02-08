@@ -59,6 +59,15 @@
                             @foreach($template['categories'] as $category)
                                 <a href="?category={{$category['slug']}}">{{$category['name']}}</a>
                             @endforeach
+                            @php
+                                $categoriesPlain = array_column($template['categories'], 'name');
+                                $categoriesPlain = implode(', ', $categoriesPlain);
+                            @endphp
+                           <div>
+                               <b>
+                                   {{$categoriesPlain}}
+                               </b>
+                           </div>
                         @endif
                     </div>
 
