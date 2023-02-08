@@ -36,7 +36,9 @@
             <div class="col-md-2">
                 <b>Categories</b>
                 <br />
-                @foreach($siteTemplateCategories as $category)
+                <a href="/">All</a>
+                <br />
+            @foreach($siteTemplateCategories as $category)
                     <a href="?category={{$category['slug']}}">{{$category['name']}}</a> <br />
                 @endforeach
             </div>
@@ -55,8 +57,6 @@
                     @endif
 
                     <div>
-
-                        <a href="/">All</a>
 
                         @if (!empty($template['categories']))
                             @foreach($template['categories'] as $category)
