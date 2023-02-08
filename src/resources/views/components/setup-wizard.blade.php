@@ -39,9 +39,9 @@
                     <h4>{{$template['name']}}</h4>
 
                     @if(isset($template['screenshot']))
-                        <div style="max-height:200px;overflow:hidden;">
+
                          <img src="{{$template['screenshot']}}" class="img-responsive" />
-                        </div>
+
                     @endif
                     <button type="button" data-template="{{$template['dir_name']}}" class="btn mt-3 btn-primary js-start-with-this-template">
                         Start With This Template

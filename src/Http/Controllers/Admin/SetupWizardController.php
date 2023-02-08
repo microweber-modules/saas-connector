@@ -8,7 +8,18 @@ class SetupWizardController extends \MicroweberPackages\Admin\Http\Controllers\A
 {
     public function index(Request $request)
     {
-        $siteTemplates = site_templates();
+        $siteTemplates = [];
+        $getTemplates = site_templates();
+        foreach ($getTemplates as $template) {
+            if (!isset($template['screenshot'])) {
+                continue;
+            }
+
+            $template['screenshot'] = thumbnail($template['screenshot'], 600, 500, true);
+
+            $siteTemplates[] = $template;
+        }
+
         $installTemplate = $request->get('install_template', false);
         if ($installTemplate) {
             $this->__installTemplate($installTemplate);
