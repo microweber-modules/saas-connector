@@ -8,6 +8,8 @@ class SetupWizardController extends \MicroweberPackages\Admin\Http\Controllers\A
 {
     public function index(Request $request)
     {
+        $filterCategory = $request->get('category', false);
+        $getCategories = [];
         $siteTemplates = [];
         $getTemplates = site_templates();
         foreach ($getTemplates as $template) {
@@ -17,7 +19,54 @@ class SetupWizardController extends \MicroweberPackages\Admin\Http\Controllers\A
 
             $template['screenshot'] = thumbnail($template['screenshot'], 600, 500, true);
 
+            $templateCategories = [];
+            $templateJson = templates_path() . $template['dir_name'] . '/composer.json';
+            if (is_file($templateJson)) {
+                $templateJson = @file_get_contents($templateJson);
+                $templateJson = @json_decode($templateJson, true);
+                if (!empty($templateJson)) {
+                    $templateCategories = [];
+                    if (isset($templateJson['keywords']) and !empty($templateJson['keywords'])) {
+                        foreach ($templateJson['keywords'] as $keyword) {
+                            if (strpos(mb_strtolower($keyword), 'microweber') !== false) {
+                                continue;
+                            }
+                            $templateCategories[] = [
+                                'name' => ucwords($keyword),
+                                'slug' => \Str::slug($keyword),
+                            ];
+                            $getCategories[$keyword] = $keyword;
+                        }
+                    }
+                }
+            }
+
+            $findedCategoryByFilter = false;
+            if ($filterCategory) {
+                if (!empty($templateCategories)) {
+                    foreach ($templateCategories as $category) {
+                        if ($category['slug'] == $filterCategory) {
+                            $findedCategoryByFilter = true;
+                        }
+                    }
+                }
+                if (!$findedCategoryByFilter) {
+                    continue;
+                }
+            }
+
+            $template['categories'] = $templateCategories;
+
             $siteTemplates[] = $template;
+        }
+
+        $siteTemplateCategories = [];
+        $cleanCategories = array_values($getCategories);
+        foreach ($cleanCategories as $category) {
+            $siteTemplateCategories[] = [
+                'name' => ucwords($category),
+                'slug' => \Str::slug($category),
+            ];
         }
 
         $installTemplate = $request->get('install_template', false);
@@ -28,6 +77,7 @@ class SetupWizardController extends \MicroweberPackages\Admin\Http\Controllers\A
 
         return view('saas_connector::setup-wizard', [
             'siteTemplates' => $siteTemplates,
+            'siteTemplateCategories' => $siteTemplateCategories,
         ]);
     }
 

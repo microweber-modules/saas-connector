@@ -33,9 +33,19 @@
             </div>
         </div>
         <div class="row mt-4">
+            <div class="col-md-2">
+                <b>Categories</b>
+                <br />
+                @foreach($siteTemplateCategories as $category)
+                    <a href="?category={{$category['slug']}}">{{$category['name']}}</a> <br />
+                @endforeach
+            </div>
+            <div class="col-md-10">
+            <div class="row">
             @foreach($siteTemplates as $template)
 
                 <div class="col-md-2">
+
                     <h4>{{$template['name']}}</h4>
 
                     @if(isset($template['screenshot']))
@@ -43,12 +53,23 @@
                          <img src="{{$template['screenshot']}}" class="img-responsive" />
 
                     @endif
+
+                    <div>
+                        @if (!empty($template['categories']))
+                            @foreach($template['categories'] as $category)
+                                <a href="?category={{$category['slug']}}">{{$category['name']}}</a>
+                            @endforeach
+                        @endif
+                    </div>
+
                     <button type="button" data-template="{{$template['dir_name']}}" class="btn mt-3 btn-primary js-start-with-this-template">
                         Start With This Template
                     </button>
                 </div>
 
             @endforeach
+            </div>
+            </div>
         </div>
     </div>
 
