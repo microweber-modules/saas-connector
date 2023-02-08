@@ -4,6 +4,11 @@
 @section('content')
 
 
+    @php
+    $styleFile = modules_url() . 'saas-connector/src/resources/views/components/scss/styles.css';
+    @endphp
+
+    <link rel="stylesheet" href="{{$styleFile}}" />
 
     <script>
         $(document).ready(function () {
