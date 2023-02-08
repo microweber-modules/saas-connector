@@ -1,4 +1,38 @@
 .mw-process-templates {
-    background: red!important;
+    .mw-process-categories-wrapper {
+         a {
+             color: #999;
+             cursor: pointer;
+             display: block;
+             padding: 11px;
+             font-size: 12px;
+             font-weight: 100;
+             text-decoration: none;
+             margin: 6px 0;
+
+             &:hover, &:active, &:focus {
+                 color: #000;
+                 #category-marker {
+                     visibility: visible;
+                 }
+             }
+         }
+
+        #category-marker {
+
+            visibility: hidden;
+            left: 13px;
+            height: 17px;
+            width: 3px;
+            background-color: #AAA;
+            top: 10px;
+            position: absolute;
+            -webkit-transition: top 1s cubic-bezier(.25, .91, .12, 1);
+            -moz-transition: top 1s cubic-bezier(.25, .91, .12, 1);
+            -o-transition: top 1s cubic-bezier(.25, .91, .12, 1);
+            transition: top 1s cubic-bezier(.25, .91, .12, 1);
+
+        }
+    }
 }
 
