@@ -36,7 +36,7 @@
             <div class="col-md-2">
                 <b>Categories</b>
                 <br />
-                <a href="/setup-wizard">All</a>
+                <a href="<?php echo site_url('setup-wizard'); ?>">All</a>
                 <br />
             @foreach($siteTemplateCategories as $category)
                     <a href="?category={{$category['slug']}}">{{$category['name']}}</a> <br />
