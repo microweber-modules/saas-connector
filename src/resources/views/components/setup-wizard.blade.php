@@ -39,15 +39,17 @@
             <div class="col-md-2">
 
                 <div class="mw-process-categories-wrapper">
-                    <span id="category-marker"></span>
-                    
-                    <a href="<?php echo site_url('setup-wizard'); ?>">
+
+                    <a <?php if (!isset($_GET['category'])): ?> class="active" <?php endif; ?> href="<?php echo site_url('setup-wizard'); ?>">
+
 
                         All
                     </a>
 
                     @foreach($siteTemplateCategories as $category)
-                        <a href="?category={{$category['slug']}}">{{$category['name']}}</a>
+                        <a <?php if (isset($_GET['category']) && $_GET['category'] == $category['slug']): ?> class="active" <?php endif; ?> href="?category={{$category['slug']}}">
+
+                            {{$category['name']}}</a>
                     @endforeach
                 </div>
 
@@ -56,37 +58,23 @@
                 <div class="row">
                     @foreach($siteTemplates as $template)
 
-                        <div class="col-xl-4 col-md-6 col-12">
-
-                            <h4>{{$template['name']}}</h4>
-
-                            @if(isset($template['screenshot']))
-
-                                 <img src="{{$template['screenshot']}}" class="img-responsive" />
-
-                            @endif
-
-                            <div>
-
-                                @if (!empty($template['categories']))
-                                    @foreach($template['categories'] as $category)
-                                        <a href="?category={{$category['slug']}}">{{$category['name']}}</a>
-                                    @endforeach
-                                    @php
-                                        $categoriesPlain = array_column($template['categories'], 'name');
-                                        $categoriesPlain = implode(', ', $categoriesPlain);
-                                    @endphp
-                                   <div>
-                                       <b>
-                                           {{$categoriesPlain}}
-                                       </b>
-                                   </div>
+                        <div class="col-xl-4 col-lg-6 col-12 p-0">
+                            <div class="mw-process-template-img-wrapper position-relative">
+                                @if(isset($template['screenshot']))
+                                    <div class="background-image-holder" style="background-image: url({{$template['screenshot']}})">
+                                    </div>
                                 @endif
+                                <h6 class="mw-process-templates-title">{{$template['name']}}</h6>
+
+
+                                 <div class="start-with-this-template-wrapper ">
+                                    <button type="button" data-template="{{$template['dir_name']}}" class="btn">
+                                        Start
+                                    </button>
+
+                                 </div>
                             </div>
 
-                            <button type="button" data-template="{{$template['dir_name']}}" class="btn mt-3 btn-primary js-start-with-this-template">
-                                Start With This Template
-                            </button>
                         </div>
 
                     @endforeach
