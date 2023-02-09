@@ -59,8 +59,9 @@
                     @foreach($siteTemplates as $template)
 
                         <div class="col-xl-4 col-lg-6 col-12 p-0">
-                            <div class="mw-process-template-img-wrapper position-relative">
-                                <a href="" class="start-with-this-template-wrapper ">
+
+                            <div class="mw-process-template-img-wrapper position-relative" @if(isset($template['colors'][0])) style="background-color: {{$template['colors'][0]['hex']}} !important;" @endif>
+                                <a href="" class="start-with-this-template-wrapper">
                                     <button type="button" data-template="{{$template['dir_name']}}" class="btn">
                                         START
                                     </button>

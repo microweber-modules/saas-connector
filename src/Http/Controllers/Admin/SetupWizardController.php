@@ -12,7 +12,9 @@ class SetupWizardController extends \MicroweberPackages\Admin\Http\Controllers\A
         $getCategories = [];
         $siteTemplates = [];
         $getTemplates = site_templates();
+
         foreach ($getTemplates as $template) {
+
             if (!isset($template['screenshot'])) {
                 continue;
             }
@@ -20,11 +22,18 @@ class SetupWizardController extends \MicroweberPackages\Admin\Http\Controllers\A
             $template['screenshot'] = thumbnail($template['screenshot'], 600, 500, true);
 
             $templateCategories = [];
+            $templateColors = [];
             $templateJson = templates_path() . $template['dir_name'] . '/composer.json';
+
             if (is_file($templateJson)) {
                 $templateJson = @file_get_contents($templateJson);
                 $templateJson = @json_decode($templateJson, true);
                 if (!empty($templateJson)) {
+
+                    if (isset($templateJson['extra']['colors'])) {
+                        $templateColors = $templateJson['extra']['colors'];
+                    }
+
                     $templateCategories = [];
                     if (isset($templateJson['keywords']) and !empty($templateJson['keywords'])) {
                         foreach ($templateJson['keywords'] as $keyword) {
@@ -56,6 +65,7 @@ class SetupWizardController extends \MicroweberPackages\Admin\Http\Controllers\A
             }
 
             $template['categories'] = $templateCategories;
+            $template['colors'] = $templateColors;
 
             $siteTemplates[] = $template;
         }
