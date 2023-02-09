@@ -28,15 +28,14 @@ body {
     .mw-process-templates .mw-process-template-img-wrapper:hover .background-image-holder {
       box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
       transform: scale(1.05);
-      transition: 1.2s; }
+      transition: 0.5s; }
     .mw-process-templates .mw-process-template-img-wrapper .background-image-holder {
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
       position: relative;
       height: 400px;
-      width: 70%;
-      left: 74px; }
+      width: 100%; }
   .mw-process-templates .mw-process-templates-title {
     font-size: 13px;
     position: absolute;

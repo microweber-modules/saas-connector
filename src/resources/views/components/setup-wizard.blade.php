@@ -54,27 +54,28 @@
                 </div>
 
             </div>
-            <div class="col-md-11">
+            <div class="col-md-10 mx-auto">
                 <div class="row">
                     @foreach($siteTemplates as $template)
 
-                        <div class="col-xl-4 col-lg-6 col-12 p-0">
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-12 p-0">
 
-                            <div class="mw-process-template-img-wrapper position-relative" @if(isset($template['colors'][0])) style="background-color: {{$template['colors'][0]['hex']}} !important;" @endif>
-                                <a href="" class="start-with-this-template-wrapper">
-                                    <button type="button" data-template="{{$template['dir_name']}}" class="btn">
-                                        START
-                                    </button>
-                                </a>
+                            <div class="mw-process-template-img-wrapper" @if(isset($template['colors'][0])) style="background-color: {{$template['colors'][0]['hex']}} !important;" @endif>
 
-                                <a href="" class="preview-this-template-wrapper ">
-                                    <button type="button" data-template="{{$template['dir_name']}}" class="btn">
-                                        PREVIEW
-                                    </button>
-                                </a>
 
                                 @if(isset($template['screenshot']))
-                                    <div class="background-image-holder" style="background-image: url({{$template['screenshot']}})">
+                                    <div class="background-image-holder position-relative" style="background-image: url({{$template['screenshot']}})">
+                                        <a href="" class="start-with-this-template-wrapper">
+                                            <button type="button" data-template="{{$template['dir_name']}}" class="btn">
+                                                START
+                                            </button>
+                                        </a>
+
+                                        <a href="" class="preview-this-template-wrapper ">
+                                            <button type="button" data-template="{{$template['dir_name']}}" class="btn">
+                                                PREVIEW
+                                            </button>
+                                        </a>
                                     </div>
                                 @endif
                                 <h6 class="mw-process-templates-title">{{$template['name']}}</h6>
