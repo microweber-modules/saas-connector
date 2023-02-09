@@ -19,27 +19,34 @@ body {
       padding-left: 8px; }
   .mw-process-templates .mw-process-template-img-wrapper {
     padding: 100px 50px;
-    background-color: #5a7648; }
-    .mw-process-templates .mw-process-template-img-wrapper img {
-      height: 100%; }
+    background-color: #5a7648;
+    animation: fadein 1s;
+    cursor: pointer; }
+    .mw-process-templates .mw-process-template-img-wrapper:hover .start-with-this-template-wrapper, .mw-process-templates .mw-process-template-img-wrapper:hover .preview-this-template-wrapper {
+      visibility: visible;
+      z-index: 1; }
+    .mw-process-templates .mw-process-template-img-wrapper:hover .background-image-holder {
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+      transform: scale(1.05);
+      transition: 1.2s; }
     .mw-process-templates .mw-process-template-img-wrapper .background-image-holder {
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
       position: relative;
-      height: 287px;
-      width: 80%;
-      left: 35px; }
+      height: 400px;
+      width: 70%;
+      left: 74px; }
   .mw-process-templates .mw-process-templates-title {
     font-size: 13px;
     position: absolute;
     bottom: 5%;
     left: 11%;
     color: #ffffff; }
-  .mw-process-templates .start-with-this-template-wrapper {
+  .mw-process-templates .start-with-this-template-wrapper, .mw-process-templates .preview-this-template-wrapper {
     position: absolute;
-    top: 150px;
-    right: 150px;
+    top: 45%;
+    right: 40%;
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -47,13 +54,26 @@ body {
     background-color: #00cc00;
     display: flex;
     justify-content: center;
-    align-items: center; }
-    .mw-process-templates .start-with-this-template-wrapper .btn, .mw-process-templates .start-with-this-template-wrapper .btn:hover, .mw-process-templates .start-with-this-template-wrapper .btn:focus, .mw-process-templates .start-with-this-template-wrapper .btn:active {
+    align-items: center;
+    z-index: 0;
+    visibility: hidden; }
+    .mw-process-templates .start-with-this-template-wrapper:hover, .mw-process-templates .preview-this-template-wrapper:hover {
+      text-decoration: none; }
+    .mw-process-templates .start-with-this-template-wrapper .btn, .mw-process-templates .start-with-this-template-wrapper .btn:hover, .mw-process-templates .start-with-this-template-wrapper .btn:focus, .mw-process-templates .start-with-this-template-wrapper .btn:active, .mw-process-templates .preview-this-template-wrapper .btn, .mw-process-templates .preview-this-template-wrapper .btn:hover, .mw-process-templates .preview-this-template-wrapper .btn:focus, .mw-process-templates .preview-this-template-wrapper .btn:active {
       color: #ffffff;
       background-color: transparent !important;
       border-color: transparent !important;
       box-shadow: none !important;
       padding: 0 !important;
-      margin: 0 !important; }
+      margin: 0 !important;
+      font-size: 14px; }
+  .mw-process-templates .preview-this-template-wrapper {
+    top: 63%;
+    left: 45%;
+    width: 70px;
+    height: 70px;
+    background-color: #999; }
+    .mw-process-templates .preview-this-template-wrapper .btn, .mw-process-templates .preview-this-template-wrapper .btn:hover, .mw-process-templates .preview-this-template-wrapper .btn:focus, .mw-process-templates .preview-this-template-wrapper .btn:active {
+      font-size: 10px; }
 
 /*# sourceMappingURL=styles.css.map */

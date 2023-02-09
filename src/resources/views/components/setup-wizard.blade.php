@@ -36,7 +36,7 @@
     <div class="container mw-process-templates">
 
         <div class="row mt-4">
-            <div class="col-md-2">
+            <div class="col-md-1">
 
                 <div class="mw-process-categories-wrapper">
 
@@ -54,12 +54,24 @@
                 </div>
 
             </div>
-            <div class="col-md-10">
+            <div class="col-md-11">
                 <div class="row">
                     @foreach($siteTemplates as $template)
 
                         <div class="col-xl-4 col-lg-6 col-12 p-0">
                             <div class="mw-process-template-img-wrapper position-relative">
+                                <a href="" class="start-with-this-template-wrapper ">
+                                    <button type="button" data-template="{{$template['dir_name']}}" class="btn">
+                                        START
+                                    </button>
+                                </a>
+
+                                <a href="" class="preview-this-template-wrapper ">
+                                    <button type="button" data-template="{{$template['dir_name']}}" class="btn">
+                                        PREVIEW
+                                    </button>
+                                </a>
+
                                 @if(isset($template['screenshot']))
                                     <div class="background-image-holder" style="background-image: url({{$template['screenshot']}})">
                                     </div>
@@ -67,12 +79,7 @@
                                 <h6 class="mw-process-templates-title">{{$template['name']}}</h6>
 
 
-                                 <div class="start-with-this-template-wrapper ">
-                                    <button type="button" data-template="{{$template['dir_name']}}" class="btn">
-                                        Start
-                                    </button>
 
-                                 </div>
                             </div>
 
                         </div>

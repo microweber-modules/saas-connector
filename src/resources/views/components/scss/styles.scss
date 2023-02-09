@@ -29,26 +29,40 @@ body {
 
          }
 
-
     }
 
     .mw-process-template-img-wrapper {
         padding: 100px 50px;
         background-color: rgb(90, 118, 72);
+        animation: fadein 1s;
+        cursor: pointer;
 
+        &:hover {
 
-        img {
-            height: 100%;
+            .start-with-this-template-wrapper, .preview-this-template-wrapper {
+                visibility: visible;
+                z-index: 1;
+
+            }
+
+            .background-image-holder {
+                box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                transform: scale(1.05);
+                transition: 1.2s;
+                
+            }
         }
+
+
 
         .background-image-holder {
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
             position: relative;
-            height: 287px;
-            width: 80%;
-            left: 35px;
+            height: 400px;
+            width: 70%;
+            left: 74px;
         }
     }
 
@@ -58,12 +72,13 @@ body {
         bottom: 5%;
         left: 11%;
         color: #ffffff;
+
     }
 
-    .start-with-this-template-wrapper {
+    .start-with-this-template-wrapper, .preview-this-template-wrapper  {
         position: absolute;
-        top: 150px;
-        right: 150px;
+        top: 45%;
+        right: 40%;
         width: 100px;
         height: 100px;
         border-radius: 50%;
@@ -72,6 +87,12 @@ body {
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: 0;
+        visibility: hidden;
+
+        &:hover {
+           text-decoration: none;
+        }
 
         .btn, .btn:hover, .btn:focus, .btn:active {
             color: #ffffff;
@@ -80,7 +101,26 @@ body {
             box-shadow: none !important;
             padding: 0 !important;
             margin: 0 !important;
+            font-size: 14px;
+
+        }
+
+    }
+
+
+    .preview-this-template-wrapper {
+        top: 63%;
+        left: 45%;
+        width: 70px;
+        height: 70px;
+        background-color: #999;
+
+        .btn, .btn:hover, .btn:focus, .btn:active {
+            font-size: 10px;
         }
     }
+
+
+
 }
 
