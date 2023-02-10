@@ -39,15 +39,16 @@
                 <h6 class="mw-templates-header text-center">Create New Site</h6>
                 <p class="mw-templates-text text-center">Choose a sutable template and customize it to fit your <br> style and ideas</p>
 
-                <div class="mw-process-categories-wrapper d-flex flex-wrap justify-content-center align-items-center">
+                <div style="max-height: 120px;overflow: hidden;" class="mw-process-categories-wrapper d-flex flex-wrap justify-content-center align-items-center">
                     <a <?php if (!isset($_GET['category'])): ?> class="active" <?php endif; ?> href="<?php echo site_url('setup-wizard'); ?>">
                         All
                     </a>
 
+
                     @foreach($siteTemplateCategories as $category)
                         <a <?php if (isset($_GET['category']) && $_GET['category'] == $category['slug']): ?> class="active" <?php endif; ?> href="?category={{$category['slug']}}">
-
-                            {{$category['name']}}</a>
+                            {{$category['name']}}
+                        </a>
                     @endforeach
                 </div>
 
@@ -60,9 +61,7 @@
 
                             <div class="mw-process-template-img-wrapper">
 
-
                                 @if(isset($template['screenshot']))
-
 
                                     <div class="card">
                                         <div class="card-img-wrapper position-relative">
@@ -79,29 +78,15 @@
 
                                             <p class="card-text">This template is great for gym, traders and more</p>
 
-                                            <a href="">
-
-
-                                                <button type="button" data-template="{{$template['dir_name']}}" class="btn mt-3 btn-primary start-with-this-template js-start-with-this-template">
-                                                    Create
-                                                </button>
-                                            </a>
-                                            
-
+                                            <button type="button" data-template="{{$template['dir_name']}}" class="btn mt-3 btn-primary start-with-this-template js-start-with-this-template">
+                                                Create
+                                            </button>
 
                                         </div>
                                     </div>
-
-
-
                                 @endif
-
-
-
                             </div>
-
                         </div>
-
                     @endforeach
                 </div>
             </div>
