@@ -67,7 +67,7 @@
                                     <div class="card">
                                         <div class="card-img-wrapper position-relative">
                                             <a href type="button" data-template="{{$template['dir_name']}}" class="btn mw-template-preview-btn">
-                                                <img src="<?php print site_url(); ?>userfiles/modules/saas-connector/recourses/views/img/mw-template-preview-eye.png" class="card-img-top" alt="templates-icon">
+                                                <img src="<?php print site_url(); ?>userfiles/modules/saas-connector/src/resources/views/img/mw-template-preview-eye.png" class="card-img-top" alt="templates-icon">
 
                                             </a>
                                             <img src="{{$template['screenshot']}}" class="card-img-top" alt="templates-img">
@@ -80,10 +80,14 @@
                                             <p class="card-text">This template is great for gym, traders and more</p>
 
                                             <a href="">
-                                                <a href type="button" data-template="{{$template['dir_name']}}" class="btn start-with-this-template">
+
+
+                                                <button type="button" data-template="{{$template['dir_name']}}" class="btn mt-3 btn-primary start-with-this-template js-start-with-this-template">
                                                     Create
-                                                </a>
+                                                </button>
                                             </a>
+                                            
+
 
                                         </div>
                                     </div>
