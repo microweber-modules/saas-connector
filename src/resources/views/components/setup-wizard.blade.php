@@ -5,10 +5,10 @@
 
 
     <style>
-    @php
-    $styleFile = modules_path() . 'saas-connector/src/resources/views/components/scss/styles.css';
-    echo @file_get_contents($styleFile);
-    @endphp
+        @php
+            $styleFile = modules_path() . 'saas-connector/src/resources/views/components/scss/styles.css';
+            echo @file_get_contents($styleFile);
+        @endphp
     </style>
 
     <script>
@@ -34,15 +34,13 @@
 
 
     <div class="container mw-process-templates">
-
         <div class="row mt-4">
-            <div class="col-md-1">
+            <div class="col-md-12">
+                <h6 class="mw-templates-header text-center">Create New Site</h6>
+                <p class="mw-templates-text text-center">Choose a sutable template and customize it to fit your <br> style and ideas</p>
 
-                <div class="mw-process-categories-wrapper">
-
+                <div class="mw-process-categories-wrapper d-flex flex-wrap justify-content-center align-items-center">
                     <a <?php if (!isset($_GET['category'])): ?> class="active" <?php endif; ?> href="<?php echo site_url('setup-wizard'); ?>">
-
-
                         All
                     </a>
 
@@ -54,31 +52,45 @@
                 </div>
 
             </div>
-            <div class="col-md-10 mx-auto">
+            <div class="col-md-12 mx-auto">
                 <div class="row">
                     @foreach($siteTemplates as $template)
 
-                        <div class="col-xl-3 col-lg-4 col-md-6 col-12 p-0">
+                        <div class="col-xl-4 col-md-6 col-12">
 
-                            <div class="mw-process-template-img-wrapper" @if(isset($template['colors'][0])) style="background-color: {{$template['colors'][0]['hex']}} !important;" @endif>
+                            <div class="mw-process-template-img-wrapper">
 
 
                                 @if(isset($template['screenshot']))
-                                    <div class="background-image-holder position-relative" style="background-image: url({{$template['screenshot']}})">
-                                        <a href="" class="start-with-this-template-wrapper">
-                                            <button type="button" data-template="{{$template['dir_name']}}" class="btn">
-                                                START
-                                            </button>
-                                        </a>
 
-                                        <a href="" class="preview-this-template-wrapper ">
-                                            <button type="button" data-template="{{$template['dir_name']}}" class="btn">
-                                                PREVIEW
-                                            </button>
-                                        </a>
+
+                                    <div class="card">
+                                        <div class="card-img-wrapper position-relative">
+                                            <a href type="button" data-template="{{$template['dir_name']}}" class="btn mw-template-preview-btn">
+                                                <img src="<?php print site_url(); ?>userfiles/modules/saas-connector/recourses/views/img/mw-template-preview-eye.png" class="card-img-top" alt="templates-icon">
+
+                                            </a>
+                                            <img src="{{$template['screenshot']}}" class="card-img-top" alt="templates-img">
+                                            <div class="card-img-overlay"></div>
+                                        </div>
+
+                                        <div class="card-body">
+                                            <h6 class="mw-process-templates-title">{{$template['name']}}</h6>
+
+                                            <p class="card-text">This template is great for gym, traders and more</p>
+
+                                            <a href="">
+                                                <a href type="button" data-template="{{$template['dir_name']}}" class="btn start-with-this-template">
+                                                    Create
+                                                </a>
+                                            </a>
+
+                                        </div>
                                     </div>
+
+
+
                                 @endif
-                                <h6 class="mw-process-templates-title">{{$template['name']}}</h6>
 
 
 
