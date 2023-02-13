@@ -13,7 +13,7 @@
     <script src="<?php print(mw()->template->get_apijs_combined_url()); ?>"></script>
 
     <script>
-        mw.lib.require('bootstrap5'); 
+        mw.lib.require('bootstrap5');
     </script>
 
 </head>
@@ -78,12 +78,13 @@
                                 @if(isset($template['screenshot']))
 
                                     <div class="card">
-                                        <div class="card-img-wrapper position-relative">
+                                        <div class="card-img-wrapper background-image-holder position-relative" style="background-image: url('{{$template['screenshot']}}')">
                                             <a href type="button" data-template="{{$template['dir_name']}}" class="btn mw-template-preview-btn">
                                                 <img src="<?php print site_url(); ?>userfiles/modules/saas-connector/src/resources/views/img/mw-template-preview-eye.png" class="card-img-top" alt="templates-icon">
 
                                             </a>
-                                            <img src="{{$template['screenshot']}}" class="card-img-top" alt="templates-img">
+
+
                                             <div class="card-img-overlay"></div>
                                         </div>
 

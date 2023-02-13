@@ -31,10 +31,18 @@ body {
     position: absolute;
     top: 0;
     left: 0; }
+  .mw-process-templates .background-image-holder {
+    background-size: 100% auto;
+    background-position: center 0;
+    background-repeat: no-repeat;
+    min-height: 450px;
+    transition: .6s; }
   .mw-process-templates .mw-process-template-img-wrapper {
     margin-bottom: 30px; }
     .mw-process-templates .mw-process-template-img-wrapper:hover {
       box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px; }
+      .mw-process-templates .mw-process-template-img-wrapper:hover .background-image-holder {
+        background-position: center 100%; }
       .mw-process-templates .mw-process-template-img-wrapper:hover .mw-template-preview-btn {
         visibility: visible;
         z-index: 2; }
