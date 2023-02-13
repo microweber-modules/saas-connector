@@ -1,19 +1,30 @@
-@extends('app::public.layout')
+<!DOCTYPE html>
+<html <?php print lang_attributes(); ?>>
+<head>
+    <title><?php _e('Resend'); ?></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="robots" content="noindex">
+    <?php get_favicon_tag(); ?>
 
+    <link type="text/css" rel="stylesheet" media="all" href="<?php print mw_includes_url(); ?>default.css"/>
+    <link type="text/css" rel="stylesheet" media="all" href="<?php print(mw()->template->get_admin_system_ui_css_url()); ?>"/>
 
-<link href="https://fonts.googleapis.com/css?family=Inter:200,300,400,500,600,700,800,900" rel="stylesheet"/>
+    <script src="<?php print(mw()->template->get_apijs_combined_url()); ?>"></script>
 
+</head>
 
-@section('content')
+<body>
 
-
+<main class="w-100 h-100vh">
+<link href="//fonts.googleapis.com/css?family=Inter:200,300,400,500,600,700,800,900" rel="stylesheet" />
     <style>
         @php
             $styleFile = modules_path() . 'saas-connector/src/resources/views/components/scss/styles.css';
             echo @file_get_contents($styleFile);
         @endphp
     </style>
-
     <script>
         $(document).ready(function () {
             $('.js-start-with-this-template').on('click', function () {
@@ -34,8 +45,6 @@
             });
         });
     </script>
-
-
     <div class="container mw-process-templates px-0">
         <div class="row mt-4">
             <div class="col-md-12">
@@ -94,7 +103,7 @@
             </div>
         </div>
     </div>
+</main>
 
-
-
-@endsection
+</body>
+</html>
