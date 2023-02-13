@@ -1,6 +1,9 @@
 @extends('app::public.layout')
 
 
+<link href="https://fonts.googleapis.com/css?family=Inter:200,300,400,500,600,700,800,900" rel="stylesheet"/>
+
+
 @section('content')
 
 
@@ -33,19 +36,19 @@
     </script>
 
 
-    <div class="container mw-process-templates">
+    <div class="container mw-process-templates px-0">
         <div class="row mt-4">
             <div class="col-md-12">
                 <h6 class="mw-templates-header text-center">Create New Site</h6>
                 <p class="mw-templates-text text-center">Choose a sutable template and customize it to fit your <br> style and ideas</p>
 
                 <div class="mw-process-categories-wrapper d-flex flex-wrap justify-content-center align-items-center">
-                    <a <?php if (!isset($_GET['category'])): ?> class="active m-lg-0 m-2" <?php endif; ?> href="<?php echo site_url('setup-wizard'); ?>">
+                    <a <?php if (!isset($_GET['category'])): ?> class="active" <?php endif; ?> href="<?php echo site_url('setup-wizard'); ?>">
                         All
                     </a>
 
                     @foreach($siteTemplateCategories as $category)
-                        <a <?php if (isset($_GET['category']) && $_GET['category'] == $category['slug']): ?> class="active m-lg-0 m-2" <?php endif; ?> href="?category={{$category['slug']}}">
+                        <a <?php if (isset($_GET['category']) && $_GET['category'] == $category['slug']): ?> class="active" <?php endif; ?> href="?category={{$category['slug']}}">
                             {{$category['name']}}
                         </a>
                     @endforeach

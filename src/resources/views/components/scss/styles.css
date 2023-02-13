@@ -1,4 +1,7 @@
- body {
+* {
+  font-family: 'Inter' !important; }
+
+body {
   background-color: #ececec !important; }
 
 .mw-process-templates {
@@ -15,6 +18,9 @@
       color: #5e5e5e;
       text-decoration: none;
       font-size: 16px; }
+      @media screen and (max-width: 1200px) {
+        .mw-process-templates .mw-process-categories-wrapper a {
+          margin: 5px; } }
       .mw-process-templates .mw-process-categories-wrapper a:hover, .mw-process-templates .mw-process-categories-wrapper a.active, .mw-process-templates .mw-process-categories-wrapper a:focus {
         text-decoration: none; }
   .mw-process-templates .mw-template-preview-btn {
@@ -45,9 +51,8 @@
     margin-bottom: 20px; }
   .mw-process-templates .mw-templates-header {
     font-size: 48px;
-    line-height: 24px;
     color: #2b2b2b;
-    font-weight: 300 !important;
+    font-weight: 200 !important;
     margin-bottom: 40px; }
   .mw-process-templates .mw-templates-text {
     margin-bottom: 40px;

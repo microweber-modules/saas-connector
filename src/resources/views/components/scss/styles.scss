@@ -1,6 +1,13 @@
+
+* {
+    font-family: 'Inter' !important;
+}
+
 body {
     background-color: #ececec!important;
 }
+
+
 
 .mw-process-templates {
     margin-top: 55px;
@@ -15,7 +22,7 @@ body {
             align-items: center;
 
             @media screen and (max-width: 1200px) {
-                margin: 15px;
+                margin: 5px;
             }
 
             border: 1px solid #c4c4c4;
@@ -82,7 +89,7 @@ body {
     .mw-templates-header {
         font-size: 48px;
         color: #2b2b2b;
-        font-weight: 300 !important;
+        font-weight: 200 !important;
         margin-bottom: 40px;
     }
 
