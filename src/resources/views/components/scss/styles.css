@@ -4,6 +4,9 @@
 body {
   background-color: #ececec !important; }
 
+@media screen and (min-width: 1700px) {
+  .container {
+    max-width: 1620px; } }
 .mw-process-templates {
   margin-top: 55px; }
   .mw-process-templates .mw-process-categories-wrapper {
@@ -36,9 +39,9 @@ body {
         visibility: visible;
         z-index: 2; }
       .mw-process-templates .mw-process-template-img-wrapper:hover .card-img-overlay {
-        background-color: #f5f5f5;
+        background-color: #000000;
         border-radius: 0;
-        opacity: .2; }
+        opacity: .4; }
   .mw-process-templates .card-text {
     font-weight: 300;
     font-size: 13px;
