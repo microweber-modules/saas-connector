@@ -19,7 +19,7 @@ class SetupWizardController extends \MicroweberPackages\Admin\Http\Controllers\A
                 continue;
             }
 
-            $template['screenshot'] = thumbnail($template['screenshot'], 600, 500, true);
+            $template['screenshot'] = thumbnail($template['screenshot'], 600, 200, false);
 
             $templateCategories = [];
             $templateColors = [];
