@@ -64,6 +64,10 @@
                             {{$category['name']}}
                         </a>
                     @endforeach
+                    <a href="" class="mw-process-template-magnify d-flex justify-content-center align-items-center">
+                        <img src="<?php print site_url(); ?>userfiles/modules/saas-connector/src/resources/views/img/mw-template-preview-magnify.png" alt="templates-icon">
+
+                    </a>
                 </div>
 
             </div>

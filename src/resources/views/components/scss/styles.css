@@ -87,5 +87,9 @@ body {
       background-color: #2b2b2b;
       border-color: #2b2b2b;
       color: #ffffff; }
+  .mw-process-templates .mw-process-template-magnify {
+    width: 80px;
+    padding: 0 !important;
+    border-color: #2b2b2b9e !important; }
 
 /*# sourceMappingURL=styles.css.map */
