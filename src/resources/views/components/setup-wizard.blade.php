@@ -9,9 +9,12 @@
     <?php get_favicon_tag(); ?>
 
     <link type="text/css" rel="stylesheet" media="all" href="<?php print mw_includes_url(); ?>default.css"/>
-    <link type="text/css" rel="stylesheet" media="all" href="<?php print(mw()->template->get_admin_system_ui_css_url()); ?>"/>
 
     <script src="<?php print(mw()->template->get_apijs_combined_url()); ?>"></script>
+
+    <script>
+        mw.lib.require('bootstrap5'); 
+    </script>
 
 </head>
 
