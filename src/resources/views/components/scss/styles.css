@@ -4,7 +4,7 @@
 body {
   background-color: #ececec !important; }
 
-@media screen and (min-width: 1700px) { 
+@media screen and (min-width: 1700px) {
   .container {
     max-width: 1620px !important; } }
 .mw-process-templates {
@@ -77,9 +77,9 @@ body {
     border-top: 1px solid #9d9d9d;
     padding: 20px; }
   .mw-process-templates .start-with-this-template {
-    background-color: #2b2b2b;
-    color: #ffffff;
-    border-color: #2b2b2b;
+    background-color: #ffffff !important;
+    color: #2b2b2b !important;
+    border-color: #2b2b2b !important;
     border-radius: 25px;
     font-weight: 300;
     height: 40px !important;
@@ -87,9 +87,9 @@ body {
     padding-left: 20px;
     margin-top: 20px; }
     .mw-process-templates .start-with-this-template:hover {
-      background-color: #000000;
-      border-color: #000000;
-      color: #2b2b2b; }
+      background-color: #000000 !important;
+      border-color: #000000 !important;
+      color: #ffffff !important; }
   .mw-process-templates .mw-process-template-magnify {
     width: 80px;
     padding: 0 !important;
