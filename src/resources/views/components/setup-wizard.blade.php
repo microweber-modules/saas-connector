@@ -54,20 +54,36 @@
                 <h6 class="mw-templates-header text-center">Create New Site</h6>
                 <p class="mw-templates-text text-center">Choose a sutable template and customize it to fit your <br> style and ideas</p>
 
-                <div class="mw-process-categories-wrapper d-flex flex-wrap justify-content-center align-items-center">
-                    <a <?php if (!isset($_GET['category'])): ?> class="active" <?php endif; ?> href="<?php echo site_url('setup-wizard'); ?>">
-                        All
-                    </a>
+                <?php
 
-                    @foreach($siteTemplateCategories as $category)
-                        <a <?php if (isset($_GET['category']) && $_GET['category'] == $category['slug']): ?> class="active" <?php endif; ?> href="?category={{$category['slug']}}">
-                            {{$category['name']}}
+                $keywords = Array(
+                    'business',
+                    'services',
+                    'store',
+                    'events',
+                    'nutrition',
+                    'travel',
+                    'press',
+                    'hotel',
+                    'education',
+
+                );
+                ?>
+
+                <div class="mw-process-categories-wrapper row">
+                    <div class="d-flex flex-wrap justify-content-center align-items-center">
+                        <a <?php if (!isset($_GET['category'])): ?> class="active mw-process-categories-icons" <?php endif; ?> class="mw-process-categories-icons" href="<?php echo site_url('setup-wizard'); ?>">
+                            All
                         </a>
-                    @endforeach
-                    <a href="" class="mw-process-template-magnify d-flex justify-content-center align-items-center">
-                        <img src="<?php print site_url(); ?>userfiles/modules/saas-connector/src/resources/views/img/mw-template-preview-magnify.png" alt="templates-icon">
-
-                    </a>
+                        <?php foreach($keywords as $keyword): ?>
+                        <a class="active col-lg" href="?category=<?php echo $keyword; ?>">
+                                <?php echo $keyword; ?>
+                        </a>
+                        <?php endforeach; ?>
+                        <a href="" class=" mw-process-template-magnify mw-process-categories-icons d-flex justify-content-center align-items-center">
+                            <img src="<?php print site_url(); ?>userfiles/modules/saas-connector/src/resources/views/img/mw-template-preview-magnify.png" alt="templates-icon">
+                        </a>
+                    </div>
                 </div>
 
             </div>
@@ -83,13 +99,7 @@
 
                                     <div class="card">
                                         <div class="card-img-wrapper background-image-holder position-relative" style="background-image: url('{{$template['screenshot']}}')">
-                                            <a href type="button" data-template="{{$template['dir_name']}}" class="btn mw-template-preview-btn">
-                                                <img src="<?php print site_url(); ?>userfiles/modules/saas-connector/src/resources/views/img/mw-template-preview-eye.png" class="card-img-top" alt="templates-icon">
 
-                                            </a>
-
-
-                                            <div class="card-img-overlay"></div>
                                         </div>
 
                                         <div class="card-body">
@@ -97,9 +107,15 @@
 
                                             <p class="card-text">This template is great for gym, traders and more</p>
 
-                                            <button type="button" data-template="{{$template['dir_name']}}" class="btn mt-3 btn-primary start-with-this-template js-start-with-this-template">
+                                            <a type="button" data-template="{{$template['dir_name']}}" class="btn mt-3 btn-primary start-with-this-template js-start-with-this-template">
                                                 Create
-                                            </button>
+                                            </a>
+
+                                            <a href type="button" data-template="{{$template['dir_name']}}" class="btn mt-3 btn-primary start-with-this-template preview-template">
+                                                 Preview
+                                            </a>
+
+
 
                                         </div>
                                     </div>
