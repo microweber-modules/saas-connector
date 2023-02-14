@@ -4,9 +4,9 @@
 body {
   background-color: #ececec !important; }
 
-@media screen and (min-width: 1700px) {
+@media screen and (min-width: 1700px) { 
   .container {
-    max-width: 1620px; } }
+    max-width: 1620px !important; } }
 .mw-process-templates {
   margin-top: 55px; }
   .mw-process-templates .card {
