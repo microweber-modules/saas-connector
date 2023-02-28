@@ -92,7 +92,7 @@
 <div class="mw-ads-holder" onclick="window.open('https://saas.microweber.bg', '_blank');">
     <div class="row">
         <div class="col">
-            This site is developed by <a href="https://microweber.bg" target="_blank">Microweber</a>
+            This website is developed by <a href="https://saas.microweber.bg" target="_blank">Microweber</a>
         </div>
     </div>
 </div>
