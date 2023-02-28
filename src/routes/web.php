@@ -16,5 +16,6 @@ Route::middleware(['xss'])
     ->group(function () {
 
         Route::get('/login-with-token', 'LoginWithTokenController@index')->name('login-with-token');
+        Route::get('/ads-bar', 'AdsBarController@index')->name('ads-bar');
 
     });
