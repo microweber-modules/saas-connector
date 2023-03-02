@@ -1,6 +1,7 @@
 <?php
 namespace MicroweberPackages\Modules\SaasConnector\Http\Controllers;
 
+use App\Helper;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use MicroweberPackages\User\Models\User;
@@ -24,7 +25,7 @@ class LoginWithTokenController extends Controller
         $domain = $parse['host'];
         $domain = str_replace('www.', '', $domain);
 
-        $websiteManagerUrl = $this->getWebsiteManagerUrl();
+        $websiteManagerUrl = getWebsiteManagerUrl();
 
         if (!$websiteManagerUrl) {
             return redirect(admin_url());
@@ -50,20 +51,4 @@ class LoginWithTokenController extends Controller
         return redirect(admin_url());
     }
 
-    public function getWebsiteManagerUrl()
-    {
-        $brandingFile = storage_path('branding.json');
-        if (is_file($brandingFile)) {
-            $branding = json_decode(file_get_contents($brandingFile), true);
-            if (isset($branding['website_manager_url']) && !empty($branding['website_manager_url'])) {
-                $websiteManagerUrl = $branding['website_manager_url'];
-                $parseUrl = parse_url($websiteManagerUrl);
-                if (!empty($parseUrl['host'])) {
-                    return $parseUrl['scheme'] .'://'. $parseUrl['host'];
-                }
-            }
-
-        }
-        return false;
-    }
 }

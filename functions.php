@@ -1,7 +1,28 @@
 <?php
 
+
+function getWebsiteManagerUrl()
+{
+    $brandingFile = storage_path('branding.json');
+    if (is_file($brandingFile)) {
+        $branding = json_decode(file_get_contents($brandingFile), true);
+        if (isset($branding['website_manager_url']) && !empty($branding['website_manager_url'])) {
+            $websiteManagerUrl = $branding['website_manager_url'];
+            $parseUrl = parse_url($websiteManagerUrl);
+            if (!empty($parseUrl['host'])) {
+                return $parseUrl['scheme'] .'://'. $parseUrl['host'];
+            }
+        }
+
+    }
+    return false;
+}
+
 event_bind('mw.admin.header.toolbar.ul', function () {
-    echo '<a href="https://saas.microweber.bg/projects" 
+
+    $saasUrl = getWebsiteManagerUrl();
+
+    echo '<a href="'.$saasUrl.'" 
                 style="border-radius: 40px;" class="btn btn-outline-primary">
            <i class="mdi mdi-arrow-left"></i> &nbsp; My Websites
         </a>';
@@ -9,7 +30,10 @@ event_bind('mw.admin.header.toolbar.ul', function () {
 
 
 event_bind('live_edit_toolbar_action_buttons', function () {
-    echo '<a href="https://saas.microweber.bg/projects" 
+
+    $saasUrl = getWebsiteManagerUrl();
+
+    echo '<a href="'.$saasUrl.'" 
               class="mw-ui-btn mw-ui-btn-medium mw-ui-btn-invert">
            <i class="mdi mdi-arrow-left"></i> &nbsp; My Websites
         </a>';
