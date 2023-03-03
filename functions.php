@@ -66,6 +66,10 @@ event_bind('mw.front', function () {
         </style>
     ';
 
+    if (route::has('saas-connector.ads-bar')) {
+        return false;
+    }
+
     $url = route('saas-connector.ads-bar');
 
     mw()->template->foot($css . '<div class="js-microweber-add-iframe-wrapper">
