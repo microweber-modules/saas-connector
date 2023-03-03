@@ -97,7 +97,7 @@
                 This website is developed by <a href="{{$saasUrl}}" target="_blank">Microweber</a>
             </div>
             <div class="col">
-                To remove this ads <a href="{{$saasUrl}}/plans" target="_blank">Upgrade your plan</a>
+                To remove this ads <a href="{{$saasUrl}}/projects/plans" target="_blank">Upgrade your plan</a>
             </div>
         </div>
     </div>
