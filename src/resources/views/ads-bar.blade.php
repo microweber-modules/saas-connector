@@ -50,12 +50,13 @@
 
     .mw-ads-holder .row .col:nth-child(1) {
         padding: 10px 0 10px 10px;
-        width: calc(100% - 210px);
+        width: calc(100% - 300px);
     }
 
     .mw-ads-holder .row .col:nth-child(2) {
         padding: 13px 10px 13px 0;
-        width: 210px;
+        width: 280px;
+        text-align: right;
     }
 
     .mw-ads-holder .text-right {
@@ -89,6 +90,18 @@
     }
 </style>
 
+@if ($isLiveEdit)
+    <div class="mw-ads-holder" onclick="window.open('https://saas.microweber.bg', '_blank');">
+        <div class="row">
+            <div class="col">
+                This website is developed by <a href="https://saas.microweber.bg" target="_blank">Microweber</a>
+            </div>
+            <div class="col">
+                To remove this ads <a href="https://saas.microweber.bg/plans" target="_blank">Upgrade your plan</a>
+            </div>
+        </div>
+    </div>
+@else
 <div class="mw-ads-holder" onclick="window.open('https://saas.microweber.bg', '_blank');">
     <div class="row">
         <div class="col">
@@ -96,3 +109,4 @@
         </div>
     </div>
 </div>
+@endif

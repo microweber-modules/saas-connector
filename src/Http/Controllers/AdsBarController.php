@@ -8,7 +8,11 @@ class AdsBarController extends Controller
 {
     public function index(Request $request) {
 
-        return view('saas_connector::ads-bar');
+        $isLiveEdit = $request->get('live_edit', false);
+
+        return view('saas_connector::ads-bar', [
+            'isLiveEdit' => $isLiveEdit
+        ]);
 
     }
 }

@@ -71,7 +71,11 @@ event_bind('mw.front', function () {
 //    }
 
 //    $url = route('saas-connector.ads-bar');
-    $url = '/ads-bar';
+    if (is_live_edit()) {
+        $url = '/ads-bar?live_edit=1';
+    } else {
+        $url = '/ads-bar';
+    }
 
     mw()->template->foot($css . '<div class="js-microweber-add-iframe-wrapper">
                  <iframe class="js-microweber-add-iframe" scrolling="no" frameborder="0" src="'.$url.'"></iframe>
