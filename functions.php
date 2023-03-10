@@ -43,9 +43,7 @@ event_bind('live_edit_toolbar_action_buttons', function () {
 
 
 
-
-
-event_bind('mw.admin.header', function () {
+event_bind('admin_head', function () {
 
     echo '
 <script type="text/javascript">
