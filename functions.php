@@ -28,6 +28,9 @@ event_bind('mw.admin.header.toolbar.ul', function () {
 });
 
 
+
+
+
 event_bind('live_edit_toolbar_action_buttons', function () {
 
     $saasUrl = getWebsiteManagerUrl();
@@ -37,6 +40,24 @@ event_bind('live_edit_toolbar_action_buttons', function () {
            <i class="mdi mdi-arrow-left"></i> &nbsp; My Websites
         </a>';
 });
+
+
+
+
+
+event_bind('mw.admin.header', function () {
+
+    echo '
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "g6d42i7m8h");
+</script>';
+
+});
+
 
 
 event_bind('mw.front', function () {
