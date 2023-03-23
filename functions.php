@@ -25,6 +25,7 @@ event_bind('mw.admin.header.toolbar.ul', function () {
                 style="border-radius: 40px;" class="btn btn-outline-primary">
            <i class="mdi mdi-arrow-left"></i> &nbsp; My Websites
         </a>';
+    
 });
 
 
@@ -72,7 +73,7 @@ event_bind('mw.front', function () {
 });
 
 
-event_bind('mw.front----', function () {
+event_bind('mw.front', function () {
 
     $css = '
         <style>
@@ -98,11 +99,6 @@ event_bind('mw.front----', function () {
         </style>
     ';
 
-//    if (route::has('saas-connector.ads-bar')) {
-//        return false;
-//    }
-
-//    $url = route('saas-connector.ads-bar');
     if (is_live_edit()) {
         $url = '/ads-bar?live_edit=1';
     } else {
