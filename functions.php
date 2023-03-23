@@ -25,7 +25,7 @@ event_bind('mw.admin.header.toolbar.ul', function () {
                 style="border-radius: 40px;" class="btn btn-outline-primary">
            <i class="mdi mdi-arrow-left"></i> &nbsp; My Websites
         </a>';
-    
+
 });
 
 
