@@ -1,5 +1,21 @@
 <?php
 
+function canIShowAdsBar()
+{
+   $checkDomain = site_url();
+   $parseUrl = parse_url($checkDomain);
+    if (!empty($parseUrl['host'])) {
+        $checkDomain = $parseUrl['host'];
+        $checkWebsite = app()->http->url('https://microweber.com/api/websites/website-info?domain='.$checkDomain)->get();
+        $checkWebsite = json_decode($checkWebsite, true);
+        if (isset($checkWebsite['showAdsBar']) && $checkWebsite['showAdsBar']) {
+            return true;
+        }
+    }
+
+   return false;
+}
+
 function getWebsiteManagerUrl()
 {
     $brandingFile = storage_path('branding.json');
@@ -27,10 +43,6 @@ event_bind('mw.admin.header.toolbar.ul', function () {
         </a>';
 
 });
-
-
-
-
 
 event_bind('live_edit_toolbar_action_buttons', function () {
 
@@ -73,9 +85,11 @@ event_bind('mw.front', function () {
 });
 
 
-event_bind('mw.front', function () {
+if (canIShowAdsBar()) {
 
-    $css = '
+    event_bind('mw.front', function () {
+
+        $css = '
         <style>
         .js-microweber-add-iframe-wrapper {
             height: 40px;
@@ -99,14 +113,15 @@ event_bind('mw.front', function () {
         </style>
     ';
 
-    if (is_live_edit()) {
-        $url = '/ads-bar?live_edit=1';
-    } else {
-        $url = '/ads-bar';
-    }
+        if (is_live_edit()) {
+            $url = '/ads-bar?live_edit=1';
+        } else {
+            $url = '/ads-bar';
+        }
 
-    mw()->template->foot($css . '<div class="js-microweber-add-iframe-wrapper">
-                 <iframe class="js-microweber-add-iframe" scrolling="no" frameborder="0" src="'.$url.'"></iframe>
+        mw()->template->foot($css . '<div class="js-microweber-add-iframe-wrapper">
+                 <iframe class="js-microweber-add-iframe" scrolling="no" frameborder="0" src="' . $url . '"></iframe>
             </div>');
 
-});
+    });
+}
