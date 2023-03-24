@@ -5,9 +5,11 @@ function canIShowAdsBar()
    $checkDomain = site_url();
    $parseUrl = parse_url($checkDomain);
     if (!empty($parseUrl['host'])) {
+
         $checkDomain = $parseUrl['host'];
-        $checkWebsite = app()->http->url('https://microweber.com/api/websites/website-info?domain='.$checkDomain)->get();
+        $checkWebsite = app()->http->url(getWebsiteManagerUrl() . '/api/websites/website-info?domain='.$checkDomain)->get();
         $checkWebsite = json_decode($checkWebsite, true);
+
         if (isset($checkWebsite['showAdsBar']) && $checkWebsite['showAdsBar']) {
             return true;
         }
