@@ -2,17 +2,27 @@
 
 function canIShowAdsBar()
 {
+   $websiteManagerUrl = getWebsiteManagerUrl();
+   if (!$websiteManagerUrl) {
+       return false;
+   }
+
    $checkDomain = site_url();
    $parseUrl = parse_url($checkDomain);
     if (!empty($parseUrl['host'])) {
 
-        $checkDomain = $parseUrl['host'];
-        $checkWebsite = app()->http->url(getWebsiteManagerUrl() . '/api/websites/website-info?domain='.$checkDomain)->get();
-        $checkWebsite = json_decode($checkWebsite, true);
+        try {
+            $checkDomain = $parseUrl['host'];
+            $checkWebsite = app()->http->url($websiteManagerUrl . '/api/websites/website-info?domain=' . $checkDomain)->get();
+            $checkWebsite = json_decode($checkWebsite, true);
 
-        if (isset($checkWebsite['showAdsBar']) && $checkWebsite['showAdsBar']) {
-            return true;
+            if (isset($checkWebsite['showAdsBar']) && $checkWebsite['showAdsBar']) {
+                return true;
+            }
+        } catch (\Exception $e) {
+            return false;
         }
+
     }
 
    return false;
