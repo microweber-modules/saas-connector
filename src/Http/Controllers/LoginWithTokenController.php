@@ -17,27 +17,9 @@ class LoginWithTokenController extends Controller
             return redirect(admin_url());
         }
 
-        $parse = parse_url(site_url());
-        if (!isset($parse['host'])) {
-            return redirect(admin_url());
-        }
+        if (validateLoginWithToken($token)) {
 
-        $domain = $parse['host'];
-        $domain = str_replace('www.', '', $domain);
-
-        $websiteManagerUrl = getWebsiteManagerUrl();
-
-        if (!$websiteManagerUrl) {
-            return redirect(admin_url());
-        }
-
-        $verifyUrl = $websiteManagerUrl . '/api/websites/verify-login-token?token=' . $token . '&domain=' . $domain;
-        $verifyCheck = @app()->http->url($verifyUrl)->get();
-        $verifyCheck = @json_decode($verifyCheck, true);
-
-        if (isset($verifyCheck['success']) && $verifyCheck['success'] == true && isset($verifyCheck['token']) && $verifyCheck['token'] == $token) {
             $user = User::where('is_admin', '=', '1')->first();
-
             if ($user !== null) {
                 \Illuminate\Support\Facades\Auth::login($user);
                 if (!empty($redirect)) {

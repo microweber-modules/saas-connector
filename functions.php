@@ -28,6 +28,32 @@ function canIShowAdsBar()
    return false;
 }
 
+function validateLoginWithToken($token)
+{
+    $parse = parse_url(site_url());
+    if (!isset($parse['host'])) {
+        return false;
+    }
+
+    $domain = $parse['host'];
+    $domain = str_replace('www.', '', $domain);
+
+    $websiteManagerUrl = getWebsiteManagerUrl();
+    if (!$websiteManagerUrl) {
+        return false;
+    }
+
+    $verifyUrl = $websiteManagerUrl . '/api/websites/verify-login-token?token=' . $token . '&domain=' . $domain;
+    $verifyCheck = @app()->http->url($verifyUrl)->get();
+    $verifyCheck = @json_decode($verifyCheck, true);
+
+    if (isset($verifyCheck['success']) && $verifyCheck['success'] == true && isset($verifyCheck['token']) && $verifyCheck['token'] == $token) {
+        return true;
+    }
+
+    return false;
+}
+
 function getWebsiteManagerUrl()
 {
     $brandingFile = storage_path('branding.json');
