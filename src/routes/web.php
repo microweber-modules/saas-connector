@@ -20,17 +20,16 @@ Route::middleware(['xss'])
         Route::get('/login-with-token', 'LoginWithTokenController@index')->name('login-with-token');
         Route::get('/ads-bar', 'AdsBarController@index')->name('ads-bar');
 
-        Route::get('/clearcache', function (){
+        Route::get('/saas-clearcache', function (){
 
             $token = request()->get('token', false);
 
             if (validateLoginWithToken($token)) {
-                \Cache::flush();
+                clearcache();
                 return 'Cache cleared';
             }
-
             return redirect(admin_url());
 
-        })->name('clearcache');
+        })->name('saas-clearcache');
 
     });

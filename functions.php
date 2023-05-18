@@ -1,23 +1,30 @@
 <?php
 
-function canIShowAdsBar()
+function getSaasWebsiteInfoFromServer()
 {
-   $websiteManagerUrl = getWebsiteManagerUrl();
-   if (!$websiteManagerUrl) {
-       return false;
-   }
+    static $checkWebsiteCache;
 
-   $checkDomain = site_url();
-   $parseUrl = parse_url($checkDomain);
+    if(is_array($checkWebsiteCache) and !empty($checkWebsiteCache)){
+        return $checkWebsiteCache;
+    }
+
+    $websiteManagerUrl = getWebsiteManagerUrl();
+    if (!$websiteManagerUrl) {
+        return false;
+    }
+
+    $checkDomain = site_url();
+    $parseUrl = parse_url($checkDomain);
     if (!empty($parseUrl['host'])) {
 
         try {
             $checkDomain = $parseUrl['host'];
             $checkWebsite = app()->http->url($websiteManagerUrl . '/api/websites/website-info?domain=' . $checkDomain)->get();
-            $checkWebsite = json_decode($checkWebsite, true);
+            $checkWebsite = @json_decode($checkWebsite, true);
 
-            if (isset($checkWebsite['showAdsBar']) && $checkWebsite['showAdsBar']) {
-                return true;
+            if (isset($checkWebsite['success']) && $checkWebsite['success']) {
+                $checkWebsiteCache = $checkWebsite;
+                return $checkWebsite;
             }
         } catch (\Exception $e) {
             return false;
@@ -25,9 +32,28 @@ function canIShowAdsBar()
 
     }
 
-   return false;
 }
 
+function canIShowAdsBar()
+{
+
+    $checkWebsite = getSaasWebsiteInfoFromServer();
+    if (isset($checkWebsite['showAdsBar']) && $checkWebsite['showAdsBar']) {
+        return true;
+    }
+
+    return false;
+}
+function canIShowExternalAds()
+{
+
+    $checkWebsite = getSaasWebsiteInfoFromServer();
+    if (isset($checkWebsite['showExternalAds']) && $checkWebsite['showExternalAds']) {
+        return true;
+    }
+
+    return false;
+}
 function validateLoginWithToken($token)
 {
     $parse = parse_url(site_url());
@@ -63,7 +89,7 @@ function getWebsiteManagerUrl()
             $websiteManagerUrl = $branding['website_manager_url'];
             $parseUrl = parse_url($websiteManagerUrl);
             if (!empty($parseUrl['host'])) {
-                return $parseUrl['scheme'] .'://'. $parseUrl['host'];
+                return $parseUrl['scheme'] . '://' . $parseUrl['host'];
             }
         }
 
@@ -75,7 +101,7 @@ event_bind('mw.admin.header.toolbar.ul', function () {
 
     $saasUrl = getWebsiteManagerUrl();
 
-    echo '<a href="'.$saasUrl.'/projects" 
+    echo '<a href="' . $saasUrl . '/projects" 
                 style="border-radius: 40px;" class="btn btn-outline-primary">
            <i class="mdi mdi-arrow-left"></i> &nbsp; My Websites
         </a>';
@@ -86,12 +112,11 @@ event_bind('live_edit_toolbar_action_buttons', function () {
 
     $saasUrl = getWebsiteManagerUrl();
 
-    echo '<a href="'.$saasUrl.'/projects" 
+    echo '<a href="' . $saasUrl . '/projects" 
               class="mw-ui-btn mw-ui-btn-medium mw-ui-btn-invert">
            <i class="mdi mdi-arrow-left"></i> &nbsp; My Websites
         </a>';
 });
-
 
 
 event_bind('admin_head', function () {
@@ -108,7 +133,6 @@ event_bind('admin_head', function () {
 });
 
 
-
 event_bind('mw.front', function () {
 
     mw()->template->foot('
@@ -121,9 +145,15 @@ event_bind('mw.front', function () {
 </script>');
 
 });
+if (canIShowExternalAds() and !in_live_edit()) {
 
+    event_bind('mw.front', function () {
+        mw()->template->foot('<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4602630167939881"
+     crossorigin="anonymous"></script>');
+    });
+}
 
-if (canIShowAdsBar()) {
+if (canIShowAdsBar() and !in_live_edit()) {
 
     event_bind('mw.front', function () {
 
