@@ -101,7 +101,7 @@ event_bind('mw.admin.header.toolbar.ul', function () {
 
 event_bind('live_edit_toolbar_action_buttons', function () {
 
-    $saasUrl = getWebsiteManagerUrl();
+    $saasUrl = getWebsiteManagerUrl(); 
 
     echo '<a href="' . $saasUrl . '/projects" 
               class="mw-ui-btn mw-ui-btn-medium mw-ui-btn-invert">
