@@ -110,12 +110,11 @@ event_bind('live_edit_toolbar_action_buttons', function () {
 });
 
 
-event_bind('admin_head', function () {
-
-    echo '';
-
-});
-
+if (isset($checkWebsite['appendScriptsAdminPanel']) && !empty($checkWebsite['appendScriptsAdminPanel'])) {
+    event_bind('admin_head', function () use($checkWebsite) {
+        echo $checkWebsite['appendScriptsAdminPanel'];
+    });
+}
 
 event_bind('mw.front', function () use($checkWebsite) {
 
