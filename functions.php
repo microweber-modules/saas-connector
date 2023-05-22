@@ -21,8 +21,6 @@ function getSaasWebsiteInfoFromServer()
             $checkWebsite = app()->http->url($websiteManagerUrl . '/api/websites/website-info?domain=' . $checkDomain)->get();
             $checkWebsite = @json_decode($checkWebsite, true);
 
-            /////var_dump($websiteManagerUrl . '/api/websites/website-info?domain=' . $checkDomain);
-
             if (isset($checkWebsite['success']) && $checkWebsite['success']) {
                 $checkWebsiteCache = $checkWebsite;
                 return $checkWebsite;
@@ -35,26 +33,18 @@ function getSaasWebsiteInfoFromServer()
 
 }
 
-function canIShowAdsBar()
-{
+$checkWebsite = getSaasWebsiteInfoFromServer();
 
-    $checkWebsite = getSaasWebsiteInfoFromServer();
-    if (isset($checkWebsite['showAdsBar']) && $checkWebsite['showAdsBar']) {
-        return true;
-    }
-
-    return false;
+$canIShowAdsBar = false;
+if (isset($checkWebsite['showAdsBar']) && $checkWebsite['showAdsBar']) {
+    $canIShowAdsBar = true;
 }
-function canIShowExternalAds()
-{
 
-    $checkWebsite = getSaasWebsiteInfoFromServer();
-    if (isset($checkWebsite['showExternalAds']) && $checkWebsite['showExternalAds']) {
-        return true;
-    }
-
-    return false;
+$canIShowExternalAds = false;
+if (isset($checkWebsite['showExternalAds']) && $checkWebsite['showExternalAds']) {
+    $canIShowExternalAds = true;
 }
+
 function validateLoginWithToken($token)
 {
     $parse = parse_url(site_url());
@@ -127,19 +117,29 @@ event_bind('admin_head', function () {
 });
 
 
-event_bind('mw.front', function () {
+event_bind('mw.front', function () use($checkWebsite) {
+    
+    if (isset($checkWebsite['appendScriptsFrontendLogged']) && !empty($checkWebsite['appendScriptsFrontendLogged'])) {
+        if (user_id()) {
+            mw()->template->foot($checkWebsite['appendScriptsFrontendLogged']);
+        }
+    }
 
-  //  mw()->template->foot('');
+    if (isset($checkWebsite['appendScriptsFrontend']) && !empty($checkWebsite['appendScriptsFrontend'])) {
+         if (!user_id()) {
+             mw()->template->foot($checkWebsite['appendScriptsFrontend']);
+         }
+    }
 
 });
-if (canIShowExternalAds() and !in_live_edit()) {
+if ($canIShowExternalAds and !in_live_edit()) {
 
     event_bind('mw.front', function () {
        // mw()->template->foot('');
     });
 }
 
-if (canIShowAdsBar() and !in_live_edit()) {
+if ($canIShowAdsBar and !in_live_edit()) {
 
     event_bind('mw.front', function () {
 
