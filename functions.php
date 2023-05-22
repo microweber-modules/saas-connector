@@ -1,5 +1,4 @@
 <?php
-
 function getSaasWebsiteInfoFromServer()
 {
     static $checkWebsiteCache;
@@ -21,6 +20,8 @@ function getSaasWebsiteInfoFromServer()
             $checkDomain = $parseUrl['host'];
             $checkWebsite = app()->http->url($websiteManagerUrl . '/api/websites/website-info?domain=' . $checkDomain)->get();
             $checkWebsite = @json_decode($checkWebsite, true);
+
+            /////var_dump($websiteManagerUrl . '/api/websites/website-info?domain=' . $checkDomain);
 
             if (isset($checkWebsite['success']) && $checkWebsite['success']) {
                 $checkWebsiteCache = $checkWebsite;
@@ -121,35 +122,20 @@ event_bind('live_edit_toolbar_action_buttons', function () {
 
 event_bind('admin_head', function () {
 
-    echo '
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "g6d42i7m8h");
-</script>';
+    echo '';
 
 });
 
 
 event_bind('mw.front', function () {
 
-    mw()->template->foot('
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "g6d42i7m8h");
-</script>');
+  //  mw()->template->foot('');
 
 });
 if (canIShowExternalAds() and !in_live_edit()) {
 
     event_bind('mw.front', function () {
-        mw()->template->foot('<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4602630167939881"
-     crossorigin="anonymous"></script>');
+       // mw()->template->foot('');
     });
 }
 
