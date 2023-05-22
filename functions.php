@@ -118,25 +118,33 @@ event_bind('admin_head', function () {
 
 
 event_bind('mw.front', function () use($checkWebsite) {
-    
-    if (isset($checkWebsite['appendScriptsFrontendLogged']) && !empty($checkWebsite['appendScriptsFrontendLogged'])) {
-        if (user_id()) {
-            mw()->template->foot($checkWebsite['appendScriptsFrontendLogged']);
-        }
-    }
 
-    if (isset($checkWebsite['appendScriptsFrontend']) && !empty($checkWebsite['appendScriptsFrontend'])) {
-         if (!user_id()) {
-             mw()->template->foot($checkWebsite['appendScriptsFrontend']);
-         }
+    if (!in_live_edit()) {
+        if (isset($checkWebsite['appendScriptsFrontendLogged']) && !empty($checkWebsite['appendScriptsFrontendLogged'])) {
+            if (user_id()) {
+                mw()->template->foot($checkWebsite['appendScriptsFrontendLogged']);
+            }
+        }
+
+        if (isset($checkWebsite['appendScriptsFrontend']) && !empty($checkWebsite['appendScriptsFrontend'])) {
+            if (!user_id()) {
+                mw()->template->foot($checkWebsite['appendScriptsFrontend']);
+            }
+        }
+    } else {
+        if (isset($checkWebsite['appendScriptsLiveEdit']) && !empty($checkWebsite['appendScriptsLiveEdit'])) {
+            mw()->template->foot($checkWebsite['appendScriptsLiveEdit']);
+        }
     }
 
 });
 if ($canIShowExternalAds and !in_live_edit()) {
 
-    event_bind('mw.front', function () {
-       // mw()->template->foot('');
-    });
+    if (isset($checkWebsite['appendScriptsExternalAdsFrontend']) && !empty($checkWebsite['appendScriptsExternalAdsFrontend'])) {
+        event_bind('mw.front', function () use($checkWebsite) {
+            mw()->template->foot($checkWebsite['appendScriptsExternalAdsFrontend']);
+        });
+    }
 }
 
 if ($canIShowAdsBar and !in_live_edit()) {
