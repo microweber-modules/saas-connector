@@ -94,10 +94,10 @@
     <div class="mw-ads-holder" onclick="window.open('{{$saasUrl}}', '_blank');">
         <div class="row">
             <div class="col">
-                This website is developed by <a href="{{$saasUrl}}" target="_blank">Microweber</a>
+                This website is created with <a href="{{$saasUrl}}" title="Create website" target="_blank">Microweber</a> website builder.
             </div>
             <div class="col">
-                To remove this ads <a href="{{$saasUrl}}/projects/plans" target="_blank">Upgrade your plan</a>
+                To remove the ads <a href="{{$saasUrl}}/projects/plans" target="_blank">Upgrade your plan</a>
             </div>
         </div>
     </div>
@@ -105,7 +105,7 @@
 <div class="mw-ads-holder" onclick="window.open('{{$saasUrl}}', '_blank');">
     <div class="row">
         <div class="col">
-            This website is developed by <a href="{{$saasUrl}}" target="_blank">Microweber</a>
+            This website is created with <a href="{{$saasUrl}}" title="Create website" target="_blank">Microweber</a> website builder.
         </div>
     </div>
 </div>
