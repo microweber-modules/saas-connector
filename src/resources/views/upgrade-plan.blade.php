@@ -9,6 +9,8 @@
             font-family: 'Raleway', sans-serif;
             color: #2b2b2b;
             background: #efefef;
+            font-size: 22px;
+            line-height: 32px;
         }
         a {
             color: #1f1f1f;
@@ -16,6 +18,8 @@
     </style>
 
     <div style="
+        width: 600px;
+        margin: 0 auto;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -31,8 +35,8 @@
 
         <div>
             <p>
-                This site is currently not published yet. If you’re the owner or contributor, log in to
-                <a href="https://microweber.com/projects">Microweber</a>.
+                This site is currently not published yet. If you’re the owner of this website, log in to
+                <a href="https://microweber.com/projects">Microweber</a> and upgrade your plan.
             </p>
         </div>
 

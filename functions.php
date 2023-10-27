@@ -122,14 +122,12 @@ if (isset($checkWebsite['activeSubscription']) && !empty($checkWebsite['activeSu
 }
 
 if (!$hasActiveSubscription) {
-
-    event_bind('mw.controller.index', function () use($checkWebsite) {
-
-        echo view('saas_connector::upgrade-plan');
-        exit;
-
+    event_bind('mw.front', function () use($checkWebsite) {
+        if (!in_live_edit() && !user_id()) {
+            echo view('saas_connector::upgrade-plan');
+            exit;
+        }
     });
-
 }
 
 event_bind('mw.front', function () use($checkWebsite) {
