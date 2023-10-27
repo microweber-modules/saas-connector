@@ -18,13 +18,14 @@
     </style>
 
     <div style="
-        width: 600px;
+        width: 650px;
         margin: 0 auto;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         height: 100vh;
+        text-align: center;
 ">
 
         <div>
@@ -35,7 +36,9 @@
 
         <div>
             <p>
-                This site is currently not published yet. If you’re the owner of this website, log in to
+                This site is currently not published yet.
+                <br />
+                If you’re the owner of this website, login to
                 <a href="https://microweber.com/projects">Microweber</a> and upgrade your plan.
             </p>
         </div>
