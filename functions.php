@@ -117,18 +117,21 @@ if (isset($checkWebsite['appendScriptsAdminPanel']) && !empty($checkWebsite['app
     });
 }
 
-$hasActiveSubscription = false;
-if (isset($checkWebsite['activeSubscription']) && !empty($checkWebsite['activeSubscription'])) {
-    $hasActiveSubscription = true;
-}
+if (isset($checkWebsite['success'])) {
 
-if (!$hasActiveSubscription) {
-    event_bind('mw.front', function () use($checkWebsite) {
-        if (!in_live_edit() && !user_id()) {
-            echo view('saas_connector::upgrade-plan');
-            exit;
-        }
-    });
+    $hasActiveSubscription = false;
+    if (isset($checkWebsite['activeSubscription']) && !empty($checkWebsite['activeSubscription'])) {
+        $hasActiveSubscription = true;
+    }
+
+    if (!$hasActiveSubscription) {
+        event_bind('mw.front', function () use ($checkWebsite) {
+            if (!in_live_edit() && !user_id()) {
+                echo view('saas_connector::upgrade-plan');
+                exit;
+            }
+        });
+    }
 }
 
 event_bind('mw.front', function () use($checkWebsite) {
