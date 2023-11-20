@@ -80,7 +80,7 @@ class SetupWizardController extends \MicroweberPackages\Admin\Http\Controllers\A
         $installTemplate = $request->get('install_template', false);
         if ($installTemplate) {
             $this->__installTemplate($installTemplate);
-            return redirect(site_url() . '?editmode=y');
+            return redirect(admin_url() . 'live-edit');
         }
 
         return view('saas_connector::setup-wizard', [
