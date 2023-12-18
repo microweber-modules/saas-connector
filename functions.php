@@ -18,9 +18,21 @@ function getSaasWebsiteInfoFromServer()
 
         try {
             $checkDomain = $parseUrl['host'];
-            $checkWebsite = app()->http->url($websiteManagerUrl . '/api/websites/website-info?domain=' . $checkDomain)->get();
-            $checkWebsite = @json_decode($checkWebsite, true);
 
+            $client = new \GuzzleHttp\Client();
+            $res = $client->request('GET',$websiteManagerUrl . '/api/websites/website-info?domain=' . $checkDomain, [
+
+            ]);
+//            echo $res->getStatusCode();
+//// "200"
+//            echo $res->getHeader('content-type')[0];
+//// 'application/json; charset=utf8'
+//            echo $res->getBody();
+
+            $checkWebsite = $res->getBody();
+            //$checkWebsite = app()->http->set_cache(0)->url($websiteManagerUrl . '/api/websites/website-info?domain=' . $checkDomain)->get();
+            $checkWebsite = @json_decode($checkWebsite, true);
+  //dd($checkWebsite);
             if (isset($checkWebsite['success']) && $checkWebsite['success']) {
                 $checkWebsiteCache = $checkWebsite;
                 return $checkWebsite;
