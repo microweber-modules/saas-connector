@@ -1,4 +1,5 @@
 <?php
+
 namespace MicroweberPackages\Modules\SaasConnector\Http\Controllers;
 
 use App\Helper;
@@ -8,7 +9,8 @@ use MicroweberPackages\User\Models\User;
 
 class LoginWithTokenController extends Controller
 {
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
 
         $redirect = $request->get('redirect', false);
 
@@ -22,6 +24,17 @@ class LoginWithTokenController extends Controller
             $user = User::where('is_admin', '=', '1')->first();
             if ($user !== null) {
                 \Illuminate\Support\Facades\Auth::login($user);
+
+                if (request()->wantsJson()) {
+                    return response()->json([
+                        'success' => true,
+                        'id' => $user->id,
+                        'is_admin' => $user->is_admin,
+                        'redirect' => admin_url()
+                    ]);
+                }
+
+
                 if (!empty($redirect)) {
                     return redirect($redirect);
                 }

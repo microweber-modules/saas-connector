@@ -17,7 +17,7 @@ Route::middleware(['xss'])
     ->namespace('MicroweberPackages\Modules\SaasConnector\Http\Controllers')
     ->group(function () {
 
-        Route::get('/login-with-token', 'LoginWithTokenController@index')->name('login-with-token');
+        Route::any('/login-with-token', 'LoginWithTokenController@index')->name('login-with-token');
         Route::get('/ads-bar', 'AdsBarController@index')->name('ads-bar');
 
         Route::get('/saas-clearcache', function (){
