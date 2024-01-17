@@ -40,7 +40,7 @@ class SaasConnectorServiceProvider extends ServiceProvider
         });
 
         if ($websiteManagerUrl) {
-            \MicroweberPackages\LiveEdit\Facades\LiveEditManager::getMenuInstance('top_right_menu')
+            $backToMyWebsites = \MicroweberPackages\LiveEdit\Facades\LiveEditManager::getMenuInstance('top_right_menu')
                 ->addChild('Back to My Websites', [
                     'attributes' => [
                         'href' => $websiteManagerUrl . '/projects',
@@ -59,9 +59,13 @@ class SaasConnectorServiceProvider extends ServiceProvider
 </g>
 </svg>'
                     ]
-                ])->setExtra('orderNumber', 1);
+                ]);
 
-            \MicroweberPackages\LiveEdit\Facades\LiveEditManager::getMenuInstance('top_right_menu')
+            if (method_exists($backToMyWebsites, 'setExtra')) {
+                $backToMyWebsites->setExtra('orderNumber', 1);
+            }
+
+            $plansAndPayments = \MicroweberPackages\LiveEdit\Facades\LiveEditManager::getMenuInstance('top_right_menu')
                 ->addChild('Plans and Payments', [
                     'attributes' => [
                         'href' => $websiteManagerUrl . '/projects/plans',
@@ -70,7 +74,10 @@ class SaasConnectorServiceProvider extends ServiceProvider
                                     d="M40 3v26c0 .8-.3 1.5-.9 2.1-.6.6-1.3.9-2.1.9H3c-.8 0-1.5-.3-2.1-.9-.6-.6-.9-1.3-.9-2.1V3C0 2.2.3 1.5.9.9 1.5.3 2.2 0 3 0h34c.8 0 1.5.3 2.1.9.6.6.9 1.3.9 2.1zM3 8.45h34V3H3v5.45zm0 6.45V29h34V14.9H3zM3 29V3v26z"/>
                             </svg>'
                     ]
-                ])->setExtra('orderNumber', 2);
+                ]);
+            if (method_exists($plansAndPayments, 'setExtra')) {
+                $plansAndPayments->setExtra('orderNumber', 2);
+            }
         }
 
     }
