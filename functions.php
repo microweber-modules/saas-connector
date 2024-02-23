@@ -136,6 +136,8 @@ if (isset($checkWebsite['success'])) {
         $hasActiveSubscription = true;
     }
 
+    define('HAS_ACTIVE_SUBSCRIPTION', $hasActiveSubscription);
+
     if (!$hasActiveSubscription) {
         event_bind('mw.front', function () use ($checkWebsite) {
             if (!in_live_edit() && !user_id()) {
