@@ -85,7 +85,7 @@ function validateLoginWithToken($token)
 
 function getWebsiteManagerUrl()
 {
-    $brandingFile = storage_path('branding.json');
+    $brandingFile = storage_path('branding_saas.json');
     if (is_file($brandingFile)) {
         $branding = json_decode(file_get_contents($brandingFile), true);
         if (isset($branding['website_manager_url']) && !empty($branding['website_manager_url'])) {
