@@ -85,6 +85,8 @@ function validateLoginWithToken($token)
 
 function getWebsiteManagerUrl()
 {
+
+
     $brandingFile = storage_path('branding_saas.json');
     if (is_file($brandingFile)) {
         $branding = json_decode(file_get_contents($brandingFile), true);
@@ -97,6 +99,24 @@ function getWebsiteManagerUrl()
         }
 
     }
+
+    $branding = [];
+    $brandingFileUser = storage_path('branding.json');
+    if (is_file($brandingFileUser)) {
+        $branding = @json_decode(file_get_contents($brandingFileUser), true);
+
+        if (isset($branding['website_manager_url']) && !empty($branding['website_manager_url'])) {
+            $websiteManagerUrl = $branding['website_manager_url'];
+
+            $parseUrl = parse_url($websiteManagerUrl);
+            if (!empty($parseUrl['host'])) {
+                return $parseUrl['scheme'] . '://' . $parseUrl['host'];
+            }
+        }
+    }
+
+
+
     return false;
 }
 
