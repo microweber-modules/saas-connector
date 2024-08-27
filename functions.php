@@ -94,7 +94,7 @@ function getWebsiteManagerUrl()
             $websiteManagerUrl = $branding['website_manager_url'];
             $parseUrl = parse_url($websiteManagerUrl);
             if (!empty($parseUrl['host'])) {
-                return trim($websiteManagerUrl);
+                return trim($websiteManagerUrl, '/');
             }
         }
 
@@ -110,7 +110,7 @@ function getWebsiteManagerUrl()
 
             $parseUrl = parse_url($websiteManagerUrl);
             if (!empty($parseUrl['host'])) {
-                return trim($websiteManagerUrl);
+                return trim($websiteManagerUrl, '/');
             }
         }
     }
