@@ -82,6 +82,26 @@ function validateLoginWithToken($token)
 
     return false;
 }
+function getBranding()
+{
+    $brandingFile = storage_path('branding_saas.json');
+    if (is_file($brandingFile)) {
+        $branding = json_decode(file_get_contents($brandingFile), true);
+        if (!empty($branding)) {
+            return $branding;
+        }
+    }
+
+    $brandingFileUser = storage_path('branding.json');
+    if (is_file($brandingFileUser)) {
+        $branding = @json_decode(file_get_contents($brandingFileUser), true);
+        if (!empty($branding)) {
+            return $branding;
+        }
+    }
+
+    return false;
+}
 
 function getWebsiteManagerUrl()
 {
@@ -161,7 +181,9 @@ if (isset($checkWebsite['success'])) {
     if (!$hasActiveSubscription) {
         event_bind('mw.front', function () use ($checkWebsite) {
             if (!in_live_edit() && !user_id()) {
-                echo view('saas_connector::upgrade-plan');
+                echo view('saas_connector::upgrade-plan',[
+                    'branding'=> getBranding(),
+                ]);
                 exit;
             }
         });

@@ -90,11 +90,15 @@
     }
 </style>
 
+
+
 @if ($isLiveEdit)
     <div class="mw-ads-holder" onclick="window.open('{{$saasUrl}}', '_blank');">
         <div class="row">
             <div class="col">
-                This website is created with <a href="{{$saasUrl}}" title="Create website" target="_blank">Microweber</a> website builder.
+                This website is created with <a href="{{$saasUrl}}" title="Create website" target="_blank">
+                    {{$brandName}}
+                </a> website builder.
             </div>
             <div class="col">
                 To remove the ads <a href="{{$saasUrl}}/projects/plans" target="_blank">Upgrade your plan</a>
@@ -105,7 +109,9 @@
 <div class="mw-ads-holder" onclick="window.open('{{$saasUrl}}', '_blank');">
     <div class="row">
         <div class="col">
-            This website is created with <a href="{{$saasUrl}}" title="Create website" target="_blank">Microweber</a> website builder.
+            This website is created with <a href="{{$saasUrl}}" title="Create website" target="_blank">
+                {{$brandName}}
+            </a> website builder.
         </div>
     </div>
 </div>

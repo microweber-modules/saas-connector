@@ -34,12 +34,26 @@
             </h1>
         </div>
 
+        @php
+        $websiteUrl = 'https://microweber.com/';
+        $brandName = 'Microweber';
+        if (isset($branding['brand_name'])) {
+            $brandName = $branding['brand_name'];
+        }
+        if (isset($branding['website_manager_url'])) {
+            $websiteUrl = $branding['website_manager_url'];
+        }
+        @endphp
         <div>
             <p>
                 This site is currently not published yet.
                 <br />
                 If you’re the owner of this website, login to
-                <a href="https://microweber.com/projects">Microweber</a> and upgrade your plan.
+                <a href="{{$websiteUrl}}">
+
+                    {{ $brandName }}
+
+                </a> and upgrade your plan.
             </p>
         </div>
 
