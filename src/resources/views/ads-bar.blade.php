@@ -1,4 +1,9 @@
 
+<head>
+    <?php get_favicon_tag(); ?>
+</head>
+
+
 <style>
     @import url("https://fonts.cdnfonts.com/css/milliard");
 

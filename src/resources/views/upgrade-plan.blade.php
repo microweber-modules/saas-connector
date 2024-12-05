@@ -1,4 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <?php get_favicon_tag(); ?>
+
+</head>
+
+
+</head>
+
+<body>
 <div>
+
+
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -60,3 +73,5 @@
     </div>
 
 </div>
+</body>
+</html>
