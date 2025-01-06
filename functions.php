@@ -77,7 +77,7 @@ function validateLoginWithToken($token)
     $verifyCheck = @json_decode($verifyCheck, true);
 
     if (isset($verifyCheck['success']) && $verifyCheck['success'] == true && isset($verifyCheck['token']) && $verifyCheck['token'] == $token) {
-        return true;
+        return $verifyCheck;
     }
 
     return false;

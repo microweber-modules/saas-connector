@@ -11,7 +11,6 @@ class LoginWithTokenController extends Controller
 {
     public function index(Request $request)
     {
-
         $redirect = $request->get('redirect', false);
 
         $token = $request->get('token', false);
@@ -19,10 +18,29 @@ class LoginWithTokenController extends Controller
             return redirect(admin_url());
         }
 
-        if (validateLoginWithToken($token)) {
+        $syncAdminDetails = $request->get('sync_admin_details', false);
+
+        $validateLoginWithToken = validateLoginWithToken($token);
+        if ($validateLoginWithToken) {
 
             $user = User::where('is_admin', '=', '1')->first();
             if ($user !== null) {
+
+                if ($syncAdminDetails) {
+                    if (isset($validateLoginWithToken['user']['email'])) {
+                        if ($user->email != $validateLoginWithToken['user']['email']) {
+                            $user->email = $validateLoginWithToken['user']['email'];
+                            if (isset($validateLoginWithToken['user']['first_name'])) {
+                                $user->first_name = $validateLoginWithToken['user']['first_name'];
+                            }
+                            if (isset($validateLoginWithToken['user']['last_name'])) {
+                                $user->last_name = $validateLoginWithToken['user']['last_name'];
+                            }
+                            $user->save();
+                        }
+                    }
+                }
+
                 \Illuminate\Support\Facades\Auth::login($user);
 
                 if (request()->wantsJson()) {
