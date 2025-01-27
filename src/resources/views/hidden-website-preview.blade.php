@@ -80,7 +80,7 @@
                         background: #f1f1f1;
                         cursor: pointer;
                     ">
-                        View website 
+                        View website
                     </button>
                 </form>
             </p>

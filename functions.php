@@ -179,6 +179,11 @@ if (isset($checkWebsite['success'])) {
     define('HAS_ACTIVE_SUBSCRIPTION', $hasActiveSubscription);
 
     if (isset($_GET['hidden_preview'])) {
+        if (isset($_GET['password_preview'])) {
+            $password = $_GET['password_preview'];
+            $domain = $checkWebsite['domain'];
+            
+        }
         event_bind('mw.front', function () use ($checkWebsite) {
             if (!in_live_edit() && !user_id()) {
                 echo view('saas_connector::hidden-website-preview',[
