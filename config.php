@@ -4,7 +4,7 @@ $config['name'] = "Saas Connector";
 $config['author'] = "Microweber";
 
 $config['categories'] = "admin";
-$config['version'] = "2.1";
+$config['version'] = "2.3";
 $config['ui_admin'] = false;
 $config['ui'] = false;
 $config['position'] = 99;
