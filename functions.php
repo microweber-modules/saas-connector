@@ -178,6 +178,17 @@ if (isset($checkWebsite['success'])) {
 
     define('HAS_ACTIVE_SUBSCRIPTION', $hasActiveSubscription);
 
+    if (isset($_GET['hidden_preview'])) {
+        event_bind('mw.front', function () use ($checkWebsite) {
+            if (!in_live_edit() && !user_id()) {
+                echo view('saas_connector::hidden-website-preview',[
+
+                ]);
+                exit;
+            }
+        });
+    }
+
     if (!$hasActiveSubscription) {
         event_bind('mw.front', function () use ($checkWebsite) {
             if (!in_live_edit() && !user_id()) {
