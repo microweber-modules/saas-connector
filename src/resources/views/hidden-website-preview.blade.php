@@ -63,7 +63,8 @@
                 <br />
                 If you want to access the website manager, please provide password:
                 <br />
-                <form action="{{ $websiteUrl }}" method="get">
+                <form method="get">
+                     <input type="hidden" name="hidden_preview" value="1" />
                     <input type="password" name="password_preview" placeholder="Password" style="
                         padding: 10px;
                         margin: 10px;
@@ -79,7 +80,7 @@
                         background: #f1f1f1;
                         cursor: pointer;
                     ">
-                        View website
+                        View website 
                     </button>
                 </form>
             </p>
