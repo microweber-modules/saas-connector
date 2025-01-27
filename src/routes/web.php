@@ -32,13 +32,13 @@ Route::middleware(['xss', 'web'])
 
         })->name('saas-clearcache');
 
-        Route::post('/validate-password-preview', function () {
+        Route::get('/validate-password-preview', function () {
 
             $checkDomain = site_url();
             $parseUrl = parse_url($checkDomain);
             $checkDomain = $parseUrl['host'];
 
-            $password = request()->post('password_preview', false);
+            $password = request()->get('password_preview', false);
             $password = trim($password);
 
             $websiteManagerUrl = getWebsiteManagerUrl();
