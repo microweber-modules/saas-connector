@@ -63,7 +63,7 @@
                 <br />
                 If you want to access the website manager, please provide password:
                 <br />
-                <form method="get">
+                <form method="post">
                      <input type="hidden" name="hidden_preview" value="1" />
                     <input type="password" name="password_preview" placeholder="Password" style="
                         padding: 10px;
