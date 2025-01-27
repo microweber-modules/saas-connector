@@ -12,7 +12,7 @@ Route::middleware(['admin'])
 
     });
 
-Route::middleware(['xss'])
+Route::middleware(['xss', 'web'])
     ->name('saas-connector.')
     ->namespace('MicroweberPackages\Modules\SaasConnector\Http\Controllers')
     ->group(function () {
@@ -31,5 +31,41 @@ Route::middleware(['xss'])
             return redirect(admin_url());
 
         })->name('saas-clearcache');
+
+        Route::post('/validate-password-preview', function () {
+
+            $checkDomain = site_url();
+            $parseUrl = parse_url($checkDomain);
+            $checkDomain = $parseUrl['host'];
+
+            $password = request()->post('password_preview', false);
+            $password = trim($password);
+
+            $websiteManagerUrl = getWebsiteManagerUrl();
+            if (!$websiteManagerUrl) {
+                return app()->user_manager->redirect(site_url());
+            }
+
+            $verifyUrl = $websiteManagerUrl . '/api/websites/validate-password-preview';
+
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_RETURNTRANSFER => 1,
+                CURLOPT_URL => $verifyUrl,
+                CURLOPT_USERAGENT => 'Microweber',
+                CURLOPT_POST => 1,
+                CURLOPT_POSTFIELDS => array(
+                    'password' => $password,
+                    'domain' => $checkDomain
+                )
+            ));
+            $verifyCheck = curl_exec($curl);
+            $verifyCheck = @json_decode($verifyCheck, true);
+            if (isset($verifyCheck['success']) && $verifyCheck['success'] == true) {
+                app()->user_manager->session_set('hidden_preview', 1);
+            }
+
+            return redirect(site_url());
+        });
 
     });

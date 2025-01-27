@@ -178,62 +178,32 @@ if (isset($checkWebsite['success'])) {
 
     define('HAS_ACTIVE_SUBSCRIPTION', $hasActiveSubscription);
 
-    if (isset($_POST['hidden_preview'])) {
-        if (isset($_POST['password_preview'])) {
-            $password = $_POST['password_preview'];
-            $password = trim($password);
-            $domain = $checkWebsite['domain'];
-
-            $websiteManagerUrl = getWebsiteManagerUrl();
-            if (!$websiteManagerUrl) {
-                return false;
-            }
-
-            $verifyUrl = $websiteManagerUrl . '/api/websites/validate-password-preview';
-
-            $curl = curl_init();
-            curl_setopt_array($curl, array(
-                CURLOPT_RETURNTRANSFER => 1,
-                CURLOPT_URL => $verifyUrl,
-                CURLOPT_USERAGENT => 'Microweber',
-                CURLOPT_POST => 1,
-                CURLOPT_POSTFIELDS => array(
-                    'password' => $password,
-                    'domain' => $domain
-                )
-            ));
-            $verifyCheck = curl_exec($curl);
-            $verifyCheck = @json_decode($verifyCheck, true);
-            if (isset($verifyCheck['success']) && $verifyCheck['success'] == true) {
-                app()->user_manager->session_set('hidden_preview', 1);
-            }
-        }
-    }
-
     if (!$hasActiveSubscription) {
         event_bind('mw.front', function () use ($checkWebsite) {
-            
-            $isHiddenPreview = false;
+
+            $canISeeTheWebsite = false;
             if (app()->user_manager->session_get('hidden_preview')) {
-                $isHiddenPreview = true;
+                $canISeeTheWebsite = true;
             }
 
             // SHOW WEBSITE PASSWORD PROTECTED PREVIEW
             if (isset($_GET['hidden_preview'])) {
                 if (!in_live_edit() && !user_id()) {
                     echo view('saas_connector::hidden-website-preview', [
-
+                        'branding' => getBranding(),
                     ]);
                     exit;
                 }
             }
 
             // SHOW UPGRADE PLAN
-            if (!$isHiddenPreview) {
-                echo view('saas_connector::upgrade-plan', [
-                    'branding' => getBranding(),
-                ]);
-                exit;
+            if (!$canISeeTheWebsite) {
+                if (!in_live_edit() && !user_id()) {
+                    echo view('saas_connector::upgrade-plan', [
+                        'branding' => getBranding(),
+                    ]);
+                    exit;
+                }
             }
         });
     }

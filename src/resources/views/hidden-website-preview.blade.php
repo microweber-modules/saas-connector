@@ -63,8 +63,8 @@
                 <br />
                 If you want to access the website manager, please provide password:
                 <br />
-                <form method="post">
-                     <input type="hidden" name="hidden_preview" value="1" />
+                <form action="{{site_url('validate-password-preview')}}" method="post">
+                    @csrf 
                     <input type="password" name="password_preview" placeholder="Password" style="
                         padding: 10px;
                         margin: 10px;
