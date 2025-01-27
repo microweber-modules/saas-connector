@@ -205,38 +205,37 @@ if (isset($checkWebsite['success'])) {
             $verifyCheck = curl_exec($curl);
             $verifyCheck = @json_decode($verifyCheck, true);
             if (isset($verifyCheck['success']) && $verifyCheck['success'] == true) {
-                $_SESSION['hidden_preview'] = 1;
+                app()->user_manager->session_set('hidden_preview', 1);
             }
         }
     }
 
-    $isHiddenPreview = false;
-    if (isset($_SESSION['hidden_preview']) && $_SESSION['hidden_preview'] == 1) {
-        $isHiddenPreview = true;
-    }
+    if (!$hasActiveSubscription) {
+        event_bind('mw.front', function () use ($checkWebsite) {
+            
+            $isHiddenPreview = false;
+            if (app()->user_manager->session_get('hidden_preview')) {
+                $isHiddenPreview = true;
+            }
 
-    if (!$isHiddenPreview) {
-        if (isset($_GET['hidden_preview'])) {
-            event_bind('mw.front', function () use ($checkWebsite) {
+            // SHOW WEBSITE PASSWORD PROTECTED PREVIEW
+            if (isset($_GET['hidden_preview'])) {
                 if (!in_live_edit() && !user_id()) {
                     echo view('saas_connector::hidden-website-preview', [
 
                     ]);
                     exit;
                 }
-            });
-        }
+            }
 
-        if (!$hasActiveSubscription) {
-            event_bind('mw.front', function () use ($checkWebsite) {
-                if (!in_live_edit() && !user_id()) {
-                    echo view('saas_connector::upgrade-plan', [
-                        'branding' => getBranding(),
-                    ]);
-                    exit;
-                }
-            });
-        }
+            // SHOW UPGRADE PLAN
+            if (!$isHiddenPreview) {
+                echo view('saas_connector::upgrade-plan', [
+                    'branding' => getBranding(),
+                ]);
+                exit;
+            }
+        });
     }
 }
 
