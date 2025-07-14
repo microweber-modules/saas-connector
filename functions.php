@@ -32,7 +32,7 @@ function getSaasWebsiteInfoFromServer()
             $checkWebsite = $res->getBody();
             //$checkWebsite = app()->http->set_cache(0)->url($websiteManagerUrl . '/api/websites/website-info?domain=' . $checkDomain)->get();
             $checkWebsite = @json_decode($checkWebsite, true);
-  //dd($checkWebsite);
+            //dd($checkWebsite);
             if (isset($checkWebsite['success']) && $checkWebsite['success']) {
                 $checkWebsiteCache = $checkWebsite;
                 return $checkWebsite;
@@ -72,9 +72,22 @@ function validateLoginWithToken($token)
         return false;
     }
 
-    $verifyUrl = $websiteManagerUrl . '/api/websites/verify-login-token?token=' . $token . '&domain=' . $domain;
-    $verifyCheck = @app()->http->url($verifyUrl)->get();
-    $verifyCheck = @json_decode($verifyCheck, true);
+    $verifyUrl = $websiteManagerUrl . '/api/websites/verify-login-token';
+
+    try {
+        $client = new \GuzzleHttp\Client();
+        $response = $client->request('POST', $verifyUrl, [
+            'form_params' => [
+                'token' => $token,
+                'domain' => $domain,
+            ],
+            'timeout' => 10,
+        ]);
+        $verifyCheck = $response->getBody();
+        $verifyCheck = @json_decode($verifyCheck, true);
+    } catch (\Exception $e) {
+        return false;
+    }
 
     if (isset($verifyCheck['success']) && $verifyCheck['success'] == true && isset($verifyCheck['token']) && $verifyCheck['token'] == $token) {
         return $verifyCheck;
